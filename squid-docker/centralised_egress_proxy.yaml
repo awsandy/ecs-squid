@@ -24,6 +24,7 @@ Parameters:
   RepositoryName:
     Description: CodeCommit repository name
     Type: String
+    Default: squid-proxy
   TotalAZsInRegion:
     Type: Number
     Default: 2
