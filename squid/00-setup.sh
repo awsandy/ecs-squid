@@ -12,9 +12,9 @@ test -n "$GIT_USERNAME" && echo GIT_USERNAME is "$GIT_USERNAME" || "echo GIT_USE
 test -n "$AWS_REGION" && echo AWS_REGION is "$AWS_REGION" || "echo AWS_REGION is not set"
 git clone codecommit::$AWS_REGION://squid-proxy
 cd squid-proxy
-cp ../../centralised-egress-proxy/Dockerfile .
-cp ../../centralised-egress-proxy/allowedlist.txt .
-cp ../../centralised-egress-proxy/entrypoint.sh .
-cp ../../centralised-egress-proxy/squid.conf .
+cp ../../squid-docker/Dockerfile .
+cp ../../squid-docker/allowedlist.txt .
+cp ../../squid-docker/entrypoint.sh .
+cp ../../squid-docker/squid.conf .
 
 
