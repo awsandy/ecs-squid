@@ -13,6 +13,10 @@ test -n "$GIT_USERNAME" && echo GIT_USERNAME is "$GIT_USERNAME" || "echo GIT_USE
 test -n "$AWS_REGION" && (echo "AWS_REGION is $AWS_REGION") || (echo "AWS_REGION is not set")
 git clone codecommit::$AWS_REGION://squid-proxy
 cd squid-proxy
+git branch -m main
+git symbolic-ref HEAD refs/heads/main
+git push -u origin main
+git push origin --delete master
 cp ../../squid-docker/Dockerfile .
 cp ../../squid-docker/allowedlist.txt .
 cp ../../squid-docker/entrypoint.sh .
