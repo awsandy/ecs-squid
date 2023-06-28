@@ -19,5 +19,9 @@ cp ../../squid-docker/Dockerfile .
 cp ../../squid-docker/allowedlist.txt .
 cp ../../squid-docker/entrypoint.sh .
 cp ../../squid-docker/squid.conf .
+git add .
+git commit -m "initial commit"
+git push
+
 
 
