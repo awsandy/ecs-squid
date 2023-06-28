@@ -31,6 +31,7 @@ comm=$(printf "aws s3 rb s3://%s --force" $j)
 echo $comm
 eval $comm
 done
+rm -rf squid-proxy
 
 
 

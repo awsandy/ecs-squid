@@ -15,15 +15,13 @@ git clone codecommit::$AWS_REGION://squid-proxy
 cd squid-proxy
 git branch -m main
 git symbolic-ref HEAD refs/heads/main
-git push -u origin main
-git push origin --delete master
 cp ../../squid-docker/Dockerfile .
 cp ../../squid-docker/allowedlist.txt .
 cp ../../squid-docker/entrypoint.sh .
 cp ../../squid-docker/squid.conf .
 git add .
 git commit -m "initial commit"
-git push
+git push origin main
 
 
 
