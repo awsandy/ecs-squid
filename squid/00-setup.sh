@@ -10,9 +10,7 @@ GIT_PASSWORD=$(echo $usercred | jq -r '.ServiceSpecificCredential.ServicePasswor
 CREDENTIAL_ID=$(echo $usercred| jq -r '.ServiceSpecificCredential.ServiceSpecificCredentialId')
 test -n "$GIT_USERNAME" && echo GIT_USERNAME is "$GIT_USERNAME" || "echo GIT_USERNAME is not set"
 #Clone the (empty) repo:
-
-
-test -n "$AWS_REGION" && echo AWS_REGION is "$AWS_REGION" || "echo AWS_REGION is not set"
+test -n "$AWS_REGION" && (echo "AWS_REGION is $AWS_REGION") || (echo "AWS_REGION is not set")
 git clone codecommit::$AWS_REGION://squid-proxy
 cd squid-proxy
 cp ../../squid-docker/Dockerfile .
