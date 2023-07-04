@@ -15,7 +15,7 @@ resource "aws_ecs_service" "squid-ecr-ECSCluster__squid-ecr-ECSService-Kf9lgxSDQ
   scheduling_strategy                = "REPLICA"
   tags                               = {}
   tags_all                           = {}
-  task_definition                    = aws_ecs_task_definition.squid-ecr-ECSTaskDefinition_1.arn
+  task_definition                    = aws_ecs_task_definition.squid--standard-ecr-ECSTaskDefinition.arn
   triggers                           = {}
 
   deployment_circuit_breaker {

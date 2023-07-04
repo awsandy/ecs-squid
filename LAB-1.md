@@ -1,10 +1,5 @@
 ## Deploy the squid proxy on ECS
 
-### Run the setup script
-
-```bash
-squid/00-setup.sh
-```
 
 ### Examine the Terraform files
 
@@ -21,9 +16,39 @@ terraform plan -out tfplan
 terraform apply tfplan
 ```
 
-### Usw the AWS console to verify / explore the deployment
+### Use the AWS console to verify / explore the deployment
 
-* Find the ECS Cluster
+Using the console find and explore these resources
+
+* The ECS Cluster
+* ECS service
+* ECS tasks
+* Task definitions
+* Load Balancers
+
+Note which task definition is deployed and which container image 
+
+
+
+### Setup a custom squid image
+
+```bash
+squid/setup-custom-squid.sh
+```
+
+Track the build in code pipeline / build
+
+Observe the ECR repo
+
+### Adjust Terraform to deploy our squid container
+
+
+
+
+
+
+
+
 
 
 
