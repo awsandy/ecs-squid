@@ -1,7 +1,22 @@
-## Blog link
+## Starting the workshop
 
-https://aws.amazon.com/blogs/networking-and-content-delivery/providing-controlled-internet-access-through-centralised-proxy-servers-using-aws-fargate-and-privatelink/
+Follow the on screen instructions from the AWS staff
+
+Once you have logged in [setup the environment](https://catalog.workshops.aws/containers/en-US/setup)
+
+If required do the [Docker primer](https://catalog.workshops.aws/containers/en-US/contdock) 
 
 
-https://github.com/aws-samples/centralised-egress-proxy
+Perform the steps in
+
+SETUP.md - Run to complete the lab initialization
+
+LAB-1.md - Run a squid proxy on ECS/Fargate
+
+LAB-2.md - Run an application and observe it's performance
+
+LAB-3.md - Dockerize php applications and host them on ECS
+
+
+
 
