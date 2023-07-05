@@ -6,16 +6,17 @@ Once you have logged in [setup the environment](https://catalog.workshops.aws/co
 
 If required do the [Docker primer](https://catalog.workshops.aws/containers/en-US/contdock) 
 
+-----
 
 Perform the steps in
 
-[SETUP.md](https://github.com/awsandy/ecs-squid/blob/main/SETUP.md) - Run to complete the lab initialization
+* [SETUP.md](https://github.com/awsandy/ecs-squid/blob/main/SETUP.md) - Run to complete the lab initialization
 
-[LAB-1.md](https://github.com/awsandy/ecs-squid/blob/main/LAB-1.md) - Run a squid proxy on ECS/Fargate
+* [LAB-1.md](https://github.com/awsandy/ecs-squid/blob/main/LAB-1.md) - Run a squid proxy on ECS/Fargate
 
-[LAB-2.md](https://github.com/awsandy/ecs-squid/blob/main/LAB-2.md) - Run an application and observe it's performance
+* [LAB-2.md](https://github.com/awsandy/ecs-squid/blob/main/LAB-2.md) - Run an application and observe it's performance
 
-[LAB-3.md](https://github.com/awsandy/ecs-squid/blob/main/LAB-3.md) - Dockerize php applications and host them on ECS
+* [LAB-3.md](https://github.com/awsandy/ecs-squid/blob/main/LAB-3.md) - Dockerize php applications and host them on ECS
 
 
 
