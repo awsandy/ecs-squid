@@ -4,7 +4,7 @@
 ### Examine the Terraform files
 
 ```bash
-cd tf-squid
+cd ~/environment/ecs-squid/tf-squid
 ```
 
 ### Deploy the squid application
@@ -28,7 +28,7 @@ Using the console find and explore these resources
 
 Note which task definition is deployed and which container image 
 
-
+-------
 
 ### Setup a custom squid docker image
 
@@ -40,32 +40,43 @@ Track the build in code pipeline / build
 
 Observe the ECR repo
 
-### Adjust Terraform to deploy our squid container
+
+-------
+
+## Adjust Terraform to deploy our squid container
 
 ### Check the ECR repo for the custom squid image
 
 ```bash
-cd ~/environment/tf-squid
+cd cd ~/environment/ecs-squid/tf-squid
 ```
 
-edit the file `aws_ecs_service__squid-ecr-ECSCluster__squid-ecr-ECSService.tf`
+edit the file:    `aws_ecs_service__squid-ecr-ECSCluster__squid-ecr-ECSService.tf`
 
-Change this line
+Change this line:
 
 `task_definition       = aws_ecs_task_definition.squid--standard-ecr-ECSTaskDefinition.arn`
 
 to:
 
-``task_definition       = aws_ecs_task_definition.squid--custom-ecr-ECSTaskDefinition.arn`
+`task_definition       = aws_ecs_task_definition.squid--custom-ecr-ECSTaskDefinition.arn`
 
+
+**save your changes !**
+
+Confirm the change being made with terraform plan
 
 ```bash
 terraform plan -out tfplan
+```
+
+Apply the change:
+
+```
 terraform apply tfplan
 ```
 
-
-
+-------
 
 
 
