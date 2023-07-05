@@ -6,7 +6,7 @@ resource "aws_codebuild_project" "squid-ecr-SquidProxyBuild" {
   }
   badge_enabled      = false
   build_timeout      = 60
-  encryption_key     = data.aws_kms_alias.alias_aws_s3.arn
+  #encryption_key     = data.aws_kms_alias.alias_aws_s3.arn
   name               = "squid-ecr-SquidProxyBuild"
   project_visibility = "PRIVATE"
   queued_timeout     = 480
