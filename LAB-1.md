@@ -30,7 +30,7 @@ Note which task definition is deployed and which container image
 
 
 
-### Setup a custom squid image
+### Setup a custom squid docker image
 
 ```bash
 squid/setup-custom-squid.sh
@@ -41,6 +41,28 @@ Track the build in code pipeline / build
 Observe the ECR repo
 
 ### Adjust Terraform to deploy our squid container
+
+### Check the ECR repo for the custom squid image
+
+```bash
+cd ~/environment/tf-squid
+```
+
+edit the file `aws_ecs_service__squid-ecr-ECSCluster__squid-ecr-ECSService.tf`
+
+Change this line
+
+`task_definition       = aws_ecs_task_definition.squid--standard-ecr-ECSTaskDefinition.arn`
+
+to:
+
+``task_definition       = aws_ecs_task_definition.squid--custom-ecr-ECSTaskDefinition.arn`
+
+
+```bash
+terraform plan -out tfplan
+terraform apply tfplan
+```
 
 
 

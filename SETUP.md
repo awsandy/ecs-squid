@@ -2,6 +2,12 @@
 
 
 
-### Install tools
+### Install tools we will use in the workshop
+
+```bash
+source squid/setup.sh
+```
+
+
 
 

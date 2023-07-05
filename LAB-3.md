@@ -28,5 +28,15 @@ curl http://localhost:8080
 
 or preview app in Cloud9
 
+---------------
+
+Explore the other examples here:
+
+https://github.com/paketo-buildpacks/samples/tree/main/php
+
+and in the cloned samples directory
+
+
+
 
 
