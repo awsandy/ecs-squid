@@ -40,11 +40,11 @@ else
   echo "Check Cloud9 AWS Managed temporary credentials are disabled - in AWS Settings"
 fi
 
-echo "Setup Terraform cache"
-if [ ! -f $HOME/.terraform.d/plugin-cache ]; then
-  mkdir -p $HOME/.terraform.d/plugin-cache
-  cp tf-setup/dot-terraform.rc $HOME/.terraformrc
-fi
+#echo "Setup Terraform cache"
+#if [ ! -f $HOME/.terraform.d/plugin-cache ]; then
+#  mkdir -p $HOME/.terraform.d/plugin-cache
+#  cp tf-setup/dot-terraform.rc $HOME/.terraformrc
+#fi
 
 echo "ssh key"
 if [ ! -f ~/.ssh/id_rsa ]; then
