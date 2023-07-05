@@ -1,14 +1,15 @@
 ## Starting the workshop
 
-Follow the on screen instructions from the AWS staff
+The AWS staff will provide details of how to access the AWS accounts.
 
-Once you have logged in [setup the environment](https://catalog.workshops.aws/containers/en-US/setup)
 
-If required do the [Docker primer](https://catalog.workshops.aws/containers/en-US/contdock) 
+Once you have logged in please follow these instructions to [setup the environment](https://catalog.workshops.aws/containers/en-US/setup)
+
+If you would like to, you can complete the [Docker primer](https://catalog.workshops.aws/containers/en-US/contdock) to perform soem basic operations with containers and docker.
 
 -----
 
-Perform the steps in
+After the above steps please try these Squid/ECS/PHP lab activities:
 
 * [SETUP.md](https://github.com/awsandy/ecs-squid/blob/main/SETUP.md) - Run to complete the lab initialization
 
@@ -18,6 +19,8 @@ Perform the steps in
 
 * [LAB-3.md](https://github.com/awsandy/ecs-squid/blob/main/LAB-3.md) - Dockerize php applications and host them on ECS
 
+
+-----
 
 
 
