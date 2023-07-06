@@ -79,6 +79,46 @@ terraform apply tfplan
 -------
 
 
+Next deploy a test instance
+
+```bash
+cd cd ~/environment/ecs-squid/lab1/test-instance
+```
+
+```bash
+terraform init
+terraform validate
+terraform plan -out tfplan
+terraform apply tfplan
+```
+
+
+----------
+
+
+Connect to the insytance via [SSM Fleet](https://eu-west-2.console.aws.amazon.com/systems-manager/managed-instances?region=eu-west-2)
+
+From the OS prompt:
+
+```bash
+proxyurl=$(aws ssm get-parameter --name /ecsworkshop/proxy-dns --region eu-west-2 --query Parameter.Value --output text)
+export http_proxy=http://${proxyurl}:3128
+export https_proxy=http://${proxyurl}:3128
+```
+
+
+### this works
+```bash
+curl https://aws.amazon.com
+```
+
+### this does not
+
+```bash
+curl https://www.microsoft.com
+```
+
+
 
 
 
