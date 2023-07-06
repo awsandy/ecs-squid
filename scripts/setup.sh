@@ -144,7 +144,6 @@ pip3 install --user --upgrade awslogs
 if aws cloud9 update-environment --environment-id $C9_PID --managed-credentials-action DISABLE 2>/dev/null; then
   rm -vf ${HOME}/.aws/credentials
   echo "Disabled temporary credentials successfully."
-fi
 else
   echo "ERROR: Encountered error associating instance profile ecsworkshop-admin with Cloud9 environment"
 fi
