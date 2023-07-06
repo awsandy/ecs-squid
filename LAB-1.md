@@ -82,7 +82,7 @@ terraform apply tfplan
 Next deploy a test instance
 
 ```bash
-cd cd ~/environment/ecs-squid/lab1/test-instance
+cd ~/environment/ecs-squid/lab1/test-instance
 ```
 
 ```bash
@@ -117,6 +117,18 @@ curl https://aws.amazon.com
 ```bash
 curl https://www.microsoft.com
 ```
+
+
+
+-------
+
+## Cleanup
+
+```bash
+cd ~/environment/ecs-squid/lab1/test-instance
+terraform destroy -auto-approve
+```
+
 
 
 
