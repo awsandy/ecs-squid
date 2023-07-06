@@ -1,3 +1,7 @@
-data "aws_ssm_parameter" "squid-endpoint" {
-  name        = "/ecsworkshop/squid-endpoint"
+data "aws_ssm_parameter" "squid-dns" {
+  name        = "/ecsworkshop/squid-dns"
+}
+
+data "aws_ssm_parameter" "squid-endpointservice" {
+  name        = "/ecsworkshop/squid-endpointservice"
 }
