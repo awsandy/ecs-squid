@@ -3,15 +3,21 @@
 The AWS staff will provide details of how to access the AWS accounts.
 
 
-Once you have logged in please follow these instructions to [setup the environment](https://catalog.workshops.aws/containers/en-US/setup)
-
-If you would like to, you can complete the [Docker primer](https://catalog.workshops.aws/containers/en-US/contdock) to perform soem basic operations with containers and docker.
+Once you have logged in open the Cloud9 IDE - but **do not** run any of the setup instructions
 
 -----
 
-After the above steps please try these Squid/ECS/PHP lab activities:
-
 * [SETUP.md](https://github.com/awsandy/ecs-squid/blob/main/SETUP.md) - Run to complete the lab initialization
+
+-----
+
+If you would like to, you can complete the 
+
+* [Docker primer](https://catalog.workshops.aws/containers/en-US/contdock) to perform soem basic operations with containers and docker.
+
+----
+
+After the above steps please try these Squid/ECS/PHP lab activities:
 
 * [LAB-1.md](https://github.com/awsandy/ecs-squid/blob/main/LAB-1.md) - Run a squid proxy on ECS/Fargate
 
