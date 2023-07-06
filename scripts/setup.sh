@@ -107,7 +107,7 @@ done
 
 this=$(pwd)
 #echo "sample apps"
-cd ~/environment
+
 
 echo "Enable bash_completion"
 . /etc/profile.d/bash_completion.sh >/dev/null
