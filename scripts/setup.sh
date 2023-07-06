@@ -146,7 +146,7 @@ fi
 
 instance_id=$(curl -sS http://169.254.169.254/latest/meta-data/instance-id)
 ipa=$(aws ec2 describe-instances --instance-ids $instance_id --query Reservations[].Instances[].IamInstanceProfile | jq -r .[].Arn)
-iip=$(aws ec2 describe-iam-instance-profile-associations --filters "Name=instance-id,Values=$instance_id" --query IamInstanceProfileAssociations[].AssociationId | jq -r .[])
+iip=$(aws ec2 describe-iam-instance-profile-associations --filters "Name=instance-id,Values=$instance_id"  --query IamInstanceProfileAssociations[].AssociationId | jq -r .[])
 
 # create ecsworkshop-admin role
 
@@ -154,18 +154,18 @@ iip=$(aws ec2 describe-iam-instance-profile-associations --filters "Name=instanc
 
 # create ecsworkshop-admin role
 
-aws iam create-role --role-name $profile_name --assume-role-policy-document file://trust-policy.json &> /dev/null
-aws iam attach-role-policy --role-name $profile_name --policy-arn arn:aws:iam::aws:policy/AdministratorAccess &> /dev/null
-aws iam create-instance-profile --instance-profile-name $profile_name &> /dev/null
-aws iam add-role-to-instance-profile --instance-profile-name $profile_name --role-name $profile_name &> /dev/null
+aws iam create-role --role-name $profile_name --assume-role-policy-document file://trust-policy.json 
+aws iam attach-role-policy --role-name $profile_name --policy-arn arn:aws:iam::aws:policy/AdministratorAccess 
+aws iam create-instance-profile --instance-profile-name $profile_name 
+aws iam add-role-to-instance-profile --instance-profile-name $profile_name --role-name $profile_name 
 
 echo "pause for IAM propegation"
 sleep 5
 
 echo "Associate $profile_name"
-if aws ec2 replace-iam-instance-profile-association --iam-instance-profile "Name=$profile_name" --association-id $iip; then
-echo "Associated ok ...."
-fi
+aws ec2 replace-iam-instance-profile-association --iam-instance-profile "Name=$profile_name" --association-id $iip
+
+# aws ec2 associate-iam-instance-profile --iam-instance-profile "Name=$profile_name" --instance-id $instance_id
 
 #  Verify environment variables required to communicate with AWS API's via the cli tools
 grep AWS_DEFAULT_REGION ~/.bashrc
