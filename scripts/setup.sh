@@ -195,8 +195,8 @@ test -n "$ACCOUNT_ID" && echo "PASSED: ACCOUNT_ID is $ACCOUNT_ID" || echo ACCOUN
 
 source ~/.bashrc
 ## IAM roles
-aws iam get-role --role-name "AWSServiceRoleForElasticLoadBalancing" || aws iam create-service-linked-role --aws-service-name "elasticloadbalancing.amazonaws.com" &> /dev/null
-aws iam get-role --role-name "AWSServiceRoleForECS" || aws iam create-service-linked-role --aws-service-name "ecs.amazonaws.com" &> /dev/null
+aws iam get-role --role-name "AWSServiceRoleForElasticLoadBalancing" &>/dev/null  || (aws iam create-service-linked-role --aws-service-name "elasticloadbalancing.amazonaws.com" &> /dev/null)
+aws iam get-role --role-name "AWSServiceRoleForECS" &>/dev/null || (aws iam create-service-linked-role --aws-service-name "ecs.amazonaws.com" &> /dev/null)
 
 echo "setup tools run" >>~/setup-tools.log
 
