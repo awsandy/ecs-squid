@@ -18,11 +18,6 @@ source ~/.bash_profile
 rm -f awscliv2.zip
 rm -rf aws
 
-
-
-
-
-
 # setup for AWS cli
 export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)
 export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r '.region')
@@ -37,12 +32,6 @@ echo "export TF_VAR_region=${AWS_REGION}" | tee -a ~/.bash_profile
 aws configure set default.region ${AWS_REGION}
 aws configure get region
 
-
-#echo "Setup Terraform cache"
-#if [ ! -f $HOME/.terraform.d/plugin-cache ]; then
-#  mkdir -p $HOME/.terraform.d/plugin-cache
-#  cp tf-setup/dot-terraform.rc $HOME/.terraformrc
-#fi
 
 echo "ssh key"
 if [ ! -f ~/.ssh/id_rsa ]; then
@@ -121,8 +110,8 @@ this=$(pwd)
 cd ~/environment
 
 echo "Enable bash_completion"
-. /etc/profile.d/bash_completion.sh &>/dev/null
-. ~/.bash_completion &>/dev/null
+. /etc/profile.d/bash_completion.sh >/dev/null
+. ~/.bash_completion >/dev/null
 echo "alias tfb='terraform init && terraform plan -out tfplan && terraform apply tfplan'" >>~/.bash_profile
 echo "alias aws='/usr/local/bin/aws'" >>~/.bash_profile
 source ~/.bash_profile
@@ -135,6 +124,12 @@ sudo yum -y install jq nodejs siege
 
 # Install cdk packages
 pip3 install --user --upgrade awslogs
+
+
+
+
+
+
 
 # aws ec2 associate-iam-instance-profile --iam-instance-profile "Name=$profile_name" --instance-id $instance_id
 
@@ -180,5 +175,4 @@ aws iam get-role --role-name "AWSServiceRoleForElasticLoadBalancing" &>/dev/null
 aws iam get-role --role-name "AWSServiceRoleForECS" &>/dev/null || (aws iam create-service-linked-role --aws-service-name "ecs.amazonaws.com" &> /dev/null)
 
 echo "setup tools run" >>~/setup-tools.log
-
 
