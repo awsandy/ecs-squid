@@ -1,7 +1,7 @@
 resource "aws_instance" "ec2-priv-1" {
   ami = "${data.aws_ami.amazon_linux.id}"
   instance_type = "t3.micro"
-  key_name = "${aws_key_pair.terraform-andyt.key_name}"
+  #key_name = "${aws_key_pair.terraform-andyt.key_name}"
   user_data = "${file("setup.sh")}"
 
   #only use for default vpc and classic ec2 
