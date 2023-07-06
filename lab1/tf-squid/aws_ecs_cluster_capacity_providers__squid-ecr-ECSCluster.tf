@@ -5,5 +5,5 @@ resource "aws_ecs_cluster_capacity_providers" "squid-ecr-ECSCluster" {
     "FARGATE",
     "FARGATE_SPOT",
   ]
-  cluster_name = "squid-ecr-ECSCluster"
+  cluster_name = aws_ecs_cluster.squid-ecr-ECSCluster.name
 }
