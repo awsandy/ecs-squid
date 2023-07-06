@@ -4,7 +4,7 @@
 ### Examine the Terraform files
 
 ```bash
-cd ~/environment/ecs-squid/tf-squid
+cd ~/environment/ecs-squid/lab1/tf-squid
 ```
 
 ### Deploy the squid application

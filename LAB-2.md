@@ -3,7 +3,7 @@
 ### Build the sample application with Terraform
 
 ```bash
-cd ~/environment/ecs-squid/ecsworkshop/mesh-microservice-app/
+cd ~/environment/ecs-squid/lab2/mesh-microservice-app/
 ```
 
 ```bash
