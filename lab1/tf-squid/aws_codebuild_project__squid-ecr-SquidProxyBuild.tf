@@ -71,17 +71,17 @@ resource "aws_codebuild_project" "squid-ecr-SquidProxyBuild" {
             phases:
               pre_build:
                 commands:
-                   - aws ecr get-login-password --region &REGION | docker login --username AWS --password-stdin &ECR_REPOSITORY
+                   - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY
               build:
                 commands:
-                  - docker build -t &IMAGE_REPO_NAME:&CODEBUILD_BUILD_NUMBER .
-                  - docker tag &IMAGE_REPO_NAME:&CODEBUILD_BUILD_NUMBER &IMAGE_REPO_NAME:&IMAGE_TAG
-                  - printf '{"ImageURI":&IMAGE_REPO_NAME:&IMAGE_TAG}' > imageDetail.json
+                  - docker build -t $IMAGE_REPO_NAME:$CODEBUILD_BUILD_NUMBER .
+                  - docker tag $IMAGE_REPO_NAME:$CODEBUILD_BUILD_NUMBER $IMAGE_REPO_NAME:$IMAGE_TAG
+                  - printf '{"ImageURI":$IMAGE_REPO_NAME:$IMAGE_TAG}' > imageDetail.json
               post_build:
                 commands:
-                  - docker push &IMAGE_REPO_NAME:&CODEBUILD_BUILD_NUMBER
-                  - docker push &IMAGE_REPO_NAME:&IMAGE_TAG
-                  - printf '[{"name":"'&CONTAINER_NAME'","imageUri":"'&IMAGE_URI'"}]' > imageDetail.json
+                  - docker push $IMAGE_REPO_NAME:$CODEBUILD_BUILD_NUMBER
+                  - docker push $IMAGE_REPO_NAME:$IMAGE_TAG
+                  - printf '[{"name":"'$CONTAINER_NAME'","imageUri":"'$IMAGE_URI'"}]' > imageDetail.json
             artifacts:
               files:
                 - imageDetail.json
