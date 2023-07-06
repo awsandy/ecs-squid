@@ -166,13 +166,12 @@ test -n "$AWS_REGION" && echo "PASSED: AWS_REGION is $AWS_REGION" || echo AWS_RE
 test -n "$TF_VAR_region" && echo "PASSED: TF_VAR_region is $TF_VAR_region" || echo TF_VAR_region is not set !!
 test -n "$ACCOUNT_ID" && echo "PASSED: ACCOUNT_ID is $ACCOUNT_ID" || echo ACCOUNT_ID is not set !!
 
-
-
-
 source ~/.bashrc
 ## IAM roles
 aws iam get-role --role-name "AWSServiceRoleForElasticLoadBalancing" &>/dev/null  || (aws iam create-service-linked-role --aws-service-name "elasticloadbalancing.amazonaws.com" &> /dev/null)
 aws iam get-role --role-name "AWSServiceRoleForECS" &>/dev/null || (aws iam create-service-linked-role --aws-service-name "ecs.amazonaws.com" &> /dev/null)
+
+
 
 echo "setup tools run" >>~/setup-tools.log
 
