@@ -145,19 +145,23 @@ test -n "$TF_VAR_region" && echo "PASSED: TF_VAR_region is $TF_VAR_region" || ec
 test -n "$ACCOUNT_ID" && echo "PASSED: ACCOUNT_ID is $ACCOUNT_ID" || echo ACCOUNT_ID is not set !!
 echo "setup tools run" >>~/setup-tools.log
 
-#profile_name="eksworkshop-admin"
+# create ecsworkshop-admin role
+profile_name="ecsworkshop-admin"
+aws iam create-role --role-name $profile_name --assume-role-policy-document file://trust-policy.json
+aws iam attach-role-policy --role-name profile_name --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
+
 instance_id=$(curl -sS http://169.254.169.254/latest/meta-data/instance-id)
 ipa=$(aws ec2 describe-instances --instance-ids $instance_id --query Reservations[].Instances[].IamInstanceProfile | jq -r .[].Arn)
 iip=$(aws ec2 describe-iam-instance-profile-associations --filters "Name=instance-id,Values=$instance_id" --query IamInstanceProfileAssociations[].AssociationId | jq -r .[])
 #echo "Associate $profile_name"
-#if aws ec2 replace-iam-instance-profile-association --iam-instance-profile "Name=$profile_name" --association-id $iip; then
+if aws ec2 replace-iam-instance-profile-association --iam-instance-profile "Name=$profile_name" --association-id $iip; then
 if aws cloud9 update-environment --environment-id $C9_PID --managed-credentials-action DISABLE 2>/dev/null; then
   rm -vf ${HOME}/.aws/credentials
   echo "Disabled temporary credentials successfully."
 fi
-#else
-#  echo "ERROR: Encountered error associating instance profile eksworkshop-admin with Cloud9 environment"
-#fi
+else
+  echo "ERROR: Encountered error associating instance profile ecsworkshop-admin with Cloud9 environment"
+fi
 
 ## CDK
 

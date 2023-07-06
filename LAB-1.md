@@ -20,7 +20,7 @@ terraform apply tfplan
 
 Using the console find and explore these resources
 
-* The ECS Cluster
+* [The ECS Clusters](https://eu-west-2.console.aws.amazon.com/ecs/v2/clusters)
 * ECS service
 * ECS tasks
 * Task definitions
