@@ -1,7 +1,7 @@
 # for demo account
 #aws codecommit create-repository --repository-name squid-proxy
 
-aws iam create-service-linked-role --aws-service-name ecs.amazonaws.com
+aws iam create-service-linked-role --aws-service-name ecs.amazonaws.com 2> /dev/null
 
 aws iam create-user --user-name git-user
 aws iam attach-user-policy --user-name git-user --policy-arn arn:aws:iam::aws:policy/AWSCodeCommitPowerUser
