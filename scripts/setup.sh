@@ -18,12 +18,9 @@ source ~/.bash_profile
 rm -f awscliv2.zip
 rm -rf aws
 
-# create ecsworkshop-admin role
 profile_name="ecsworkshop-admin"
-aws iam create-role --role-name $profile_name --assume-role-policy-document file://trust-policy.json &> /dev/null
-aws iam attach-role-policy --role-name $profile_name --policy-arn arn:aws:iam::aws:policy/AdministratorAccess &> /dev/null
-aws iam create-instance-profile --instance-profile-name $profile_name &> /dev/null
-aws iam add-role-to-instance-profile --instance-profile-name $profile_name --role-name $profile_name &> /dev/null
+
+
 
 
 # setup for AWS cli
@@ -144,18 +141,19 @@ pip3 install --user --upgrade awslogs
 if aws cloud9 update-environment --environment-id $C9_PID --managed-credentials-action DISABLE 2>/dev/null; then
   rm -vf ${HOME}/.aws/credentials
   echo "Disabled temporary credentials successfully."
-else
-  echo "ERROR: Encountered error associating instance profile ecsworkshop-admin with Cloud9 environment"
 fi
+
 
 instance_id=$(curl -sS http://169.254.169.254/latest/meta-data/instance-id)
 ipa=$(aws ec2 describe-instances --instance-ids $instance_id --query Reservations[].Instances[].IamInstanceProfile | jq -r .[].Arn)
 iip=$(aws ec2 describe-iam-instance-profile-associations --filters "Name=instance-id,Values=$instance_id" --query IamInstanceProfileAssociations[].AssociationId | jq -r .[])
 
+# create ecsworkshop-admin role
+
 
 
 # create ecsworkshop-admin role
-profile_name="ecsworkshop-admin"
+
 aws iam create-role --role-name $profile_name --assume-role-policy-document file://trust-policy.json &> /dev/null
 aws iam attach-role-policy --role-name $profile_name --policy-arn arn:aws:iam::aws:policy/AdministratorAccess &> /dev/null
 aws iam create-instance-profile --instance-profile-name $profile_name &> /dev/null
