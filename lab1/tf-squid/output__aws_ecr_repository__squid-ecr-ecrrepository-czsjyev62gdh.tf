@@ -9,3 +9,7 @@ output "endpoint_service_name" {
 output "endpoint_service_dns" {
   value = aws_vpc_endpoint_service.vpce-svc-09041d05a3a2059cc.base_endpoint_dns_names
 }
+
+output "squid-endpoint" {
+  value = tolist(aws_vpc_endpoint_service.vpce-svc-09041d05a3a2059cc.base_endpoint_dns_names)[0]
+}
