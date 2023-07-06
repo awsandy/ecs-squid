@@ -25,8 +25,7 @@ resource "aws_instance" "ec2-priv-1" {
 #depends_on = ["aws_nat_gateway.nat-gw"]
 
 tags = {
-    Name = "ec2-priv-1"
-    RGtest1 = "RGtest1"
+    Name = "test-squid"
   }
 
 }
