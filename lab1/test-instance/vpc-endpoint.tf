@@ -1,6 +1,6 @@
 resource "aws_vpc_endpoint" "ptfe_service" {
   vpc_id            = aws_vpc.ec2-vpc.id
-  service_name      = aws_vpc_endpoint_service.squid.name
+  service_name      = data.aws_vpc_endpoint_service.squid.service_name
   vpc_endpoint_type = "Interface"
 
   #security_group_ids = [
