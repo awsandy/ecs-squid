@@ -18,7 +18,7 @@ source ~/.bash_profile
 rm -f awscliv2.zip
 rm -rf aws
 
-profile_name="ecsworkshop-admin"
+
 
 
 
@@ -136,35 +136,6 @@ sudo yum -y install jq nodejs siege
 # Install cdk packages
 pip3 install --user --upgrade awslogs
 
-
-
-if aws cloud9 update-environment --environment-id $C9_PID --managed-credentials-action DISABLE 2>/dev/null; then
-  rm -vf ${HOME}/.aws/credentials
-  echo "Disabled temporary credentials successfully."
-fi
-
-
-instance_id=$(curl -sS http://169.254.169.254/latest/meta-data/instance-id)
-ipa=$(aws ec2 describe-instances --instance-ids $instance_id --query Reservations[].Instances[].IamInstanceProfile | jq -r .[].Arn)
-iip=$(aws ec2 describe-iam-instance-profile-associations --filters "Name=instance-id,Values=$instance_id"  --query IamInstanceProfileAssociations[].AssociationId | jq -r .[])
-
-# create ecsworkshop-admin role
-
-
-
-# create ecsworkshop-admin role
-
-aws iam create-role --role-name $profile_name --assume-role-policy-document file://trust-policy.json 
-aws iam attach-role-policy --role-name $profile_name --policy-arn arn:aws:iam::aws:policy/AdministratorAccess 
-aws iam create-instance-profile --instance-profile-name $profile_name 
-aws iam add-role-to-instance-profile --instance-profile-name $profile_name --role-name $profile_name 
-
-echo "pause for IAM propegation"
-sleep 5
-
-echo "Associate $profile_name"
-aws ec2 replace-iam-instance-profile-association --iam-instance-profile "Name=$profile_name" --association-id $iip
-
 # aws ec2 associate-iam-instance-profile --iam-instance-profile "Name=$profile_name" --instance-id $instance_id
 
 #  Verify environment variables required to communicate with AWS API's via the cli tools
@@ -209,20 +180,5 @@ aws iam get-role --role-name "AWSServiceRoleForElasticLoadBalancing" &>/dev/null
 aws iam get-role --role-name "AWSServiceRoleForECS" &>/dev/null || (aws iam create-service-linked-role --aws-service-name "ecs.amazonaws.com" &> /dev/null)
 
 echo "setup tools run" >>~/setup-tools.log
-
-echo "Checking workshop setup ..."
-instid=`curl -s -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/instance-id`
-iname=$(aws ec2 describe-tags --filters "Name=resource-type,Values=instance" "Name=resource-id,Values=$instid" | jq -r '.Tags[] | select(.Key=="Name").Value')
-echo $iname| grep 'containers\|-Project-mod-' -q && echo "PASSED: Cloud9 IDE name is valid " || echo "ERROR: Cloud9 IDE name invalid! - DO NOT PROCEED"
-#echo $instid
-aws sts get-caller-identity --query Arn | grep ecsworkshop-admin -q && echo "PASSED: IAM role valid" || (echo "ERROR: IAM role not valid - DO NOT PROCEED"  && echo "Check Cloud9 AWS Managed temporary credentials are disabled - in AWS Settings")
-ip=`aws ec2 describe-iam-instance-profile-associations --filters "Name=instance-id,Values=$instid" | jq .IamInstanceProfileAssociations[0].IamInstanceProfile.Arn | rev | cut -f1 -d'/' | rev | tr -d '"'`
-#echo "Instance Profile=$ip"
-if [ "$ip" != "ecsworkshop-admin" ] ; then
-echo "ERROR: Could not find Instance profile eksworkshop-admin - DO NOT PROCEED"
-else
-echo "PASSED: Found Instance profile $ip - proceed with the workshop"
-fi
-
 
 
