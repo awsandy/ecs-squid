@@ -159,11 +159,13 @@ aws iam attach-role-policy --role-name $profile_name --policy-arn arn:aws:iam::a
 aws iam create-instance-profile --instance-profile-name $profile_name &> /dev/null
 aws iam add-role-to-instance-profile --instance-profile-name $profile_name --role-name $profile_name &> /dev/null
 
+echo "pause for IAM propegation"
 sleep 5
 
 echo "Associate $profile_name"
 if aws ec2 replace-iam-instance-profile-association --iam-instance-profile "Name=$profile_name" --association-id $iip; then
-
+echo "Associated ok ...."
+fi
 
 #  Verify environment variables required to communicate with AWS API's via the cli tools
 grep AWS_DEFAULT_REGION ~/.bashrc
