@@ -5,14 +5,6 @@ sudo yum update -y >/dev/null
 echo "Update pip"
 sudo pip install --upgrade pip 2 &>/dev/null
 
-# create ecsworkshop-admin role
-profile_name="ecsworkshop-admin"
-aws iam create-role --role-name $profile_name --assume-role-policy-document file://trust-policy.json
-aws iam attach-role-policy --role-name $profile_name --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
-aws iam create-instance-profile --instance-profile-name $profile_name
-aws iam add-role-to-instance-profile --instance-profile-name $profile_name --role-name $profile_name
-
-
 #
 echo "Uninstall AWS CLI v1"
 sudo /usr/local/bin/pip uninstall awscli -y 2 &>/dev/null
@@ -26,12 +18,10 @@ source ~/.bash_profile
 rm -f awscliv2.zip
 rm -rf aws
 
-
-
 # create ecsworkshop-admin role
 profile_name="ecsworkshop-admin"
 aws iam create-role --role-name $profile_name --assume-role-policy-document file://trust-policy.json
-aws iam attach-role-policy --role-name profile_name --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
+aws iam attach-role-policy --role-name $profile_name --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
 aws iam create-instance-profile --instance-profile-name $profile_name
 aws iam add-role-to-instance-profile --instance-profile-name $profile_name --role-name $profile_name
 
