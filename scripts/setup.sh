@@ -20,10 +20,10 @@ rm -rf aws
 
 # create ecsworkshop-admin role
 profile_name="ecsworkshop-admin"
-aws iam create-role --role-name $profile_name --assume-role-policy-document file://trust-policy.json
-aws iam attach-role-policy --role-name $profile_name --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
-aws iam create-instance-profile --instance-profile-name $profile_name
-aws iam add-role-to-instance-profile --instance-profile-name $profile_name --role-name $profile_name
+aws iam create-role --role-name $profile_name --assume-role-policy-document file://trust-policy.json &> /dev/null
+aws iam attach-role-policy --role-name $profile_name --policy-arn arn:aws:iam::aws:policy/AdministratorAccess &> /dev/null
+aws iam create-instance-profile --instance-profile-name $profile_name &> /dev/null
+aws iam add-role-to-instance-profile --instance-profile-name $profile_name --role-name $profile_name &> /dev/null
 
 
 # setup for AWS cli
@@ -40,13 +40,6 @@ echo "export TF_VAR_region=${AWS_REGION}" | tee -a ~/.bash_profile
 aws configure set default.region ${AWS_REGION}
 aws configure get region
 
-aws sts get-caller-identity --query Arn | grep AWSCloud9SSMAccessRole >/dev/null
-if [ $? -eq 0 ]; then
-  rm -vf ${HOME}/.aws/credentials
-else
-  #echo "ERROR: Could not find Instance profile AWSCloud9SSMAccessRole! - DO NOT PROCEED"
-  echo "Check Cloud9 AWS Managed temporary credentials are disabled - in AWS Settings"
-fi
 
 #echo "Setup Terraform cache"
 #if [ ! -f $HOME/.terraform.d/plugin-cache ]; then
@@ -68,7 +61,7 @@ rm -f ~/environment/session-manager-plugin.rpm
 #
 
 # cleanup key_pair if already there
-aws ec2 delete-key-pair --key-name "eksworkshop" >/dev/null
+aws ec2 delete-key-pair --key-name "eksworkshop" &> /dev/null
 
 echo "pip3"
 curl --silent "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
@@ -132,13 +125,10 @@ cd ~/environment
 
 echo "Enable bash_completion"
 . /etc/profile.d/bash_completion.sh &>/dev/null
-. ~/.bash_completion
+. ~/.bash_completion &>/dev/null
 echo "alias tfb='terraform init && terraform plan -out tfplan && terraform apply tfplan'" >>~/.bash_profile
 echo "alias aws='/usr/local/bin/aws'" >>~/.bash_profile
 source ~/.bash_profile
-
-
-
 
 
 ## CDK
@@ -205,8 +195,8 @@ test -n "$ACCOUNT_ID" && echo "PASSED: ACCOUNT_ID is $ACCOUNT_ID" || echo ACCOUN
 
 source ~/.bashrc
 ## IAM roles
-aws iam get-role --role-name "AWSServiceRoleForElasticLoadBalancing" || aws iam create-service-linked-role --aws-service-name "elasticloadbalancing.amazonaws.com"
-aws iam get-role --role-name "AWSServiceRoleForECS" || aws iam create-service-linked-role --aws-service-name "ecs.amazonaws.com"
+aws iam get-role --role-name "AWSServiceRoleForElasticLoadBalancing" || aws iam create-service-linked-role --aws-service-name "elasticloadbalancing.amazonaws.com" &> /dev/null
+aws iam get-role --role-name "AWSServiceRoleForECS" || aws iam create-service-linked-role --aws-service-name "ecs.amazonaws.com" &> /dev/null
 
 echo "setup tools run" >>~/setup-tools.log
 
