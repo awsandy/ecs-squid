@@ -10,6 +10,14 @@ ingress {
     to_port = 22
     protocol = "tcp"
   }
+ingress {
+    cidr_blocks = ["10.1.0.0/24"]
+    from_port = 3128
+    to_port = 3128
+    protocol = "tcp"
+  }
+
+
 // Terraform removes the default egress rule - so add it back in
   egress {
    from_port = 0

@@ -1,4 +1,4 @@
-resource "aws_vpc_endpoint" "ptfe_service" {
+resource "aws_vpc_endpoint" "squid_service" {
   vpc_id            = aws_vpc.ec2-vpc.id
   service_name      = data.aws_vpc_endpoint_service.squid.service_name
   vpc_endpoint_type = "Interface"
