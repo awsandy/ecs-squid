@@ -6,7 +6,5 @@ resource "aws_s3_bucket" "b_squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf
   tags                = {}
   tags_all            = {}
 
-
-
-
+  force_destroy=true
 }

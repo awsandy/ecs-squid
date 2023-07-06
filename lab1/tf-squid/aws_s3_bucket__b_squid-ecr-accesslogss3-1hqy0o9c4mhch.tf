@@ -5,6 +5,7 @@ resource "aws_s3_bucket" "b_squid-ecr-accesslogss3-1hqy0o9c4mhch" {
   object_lock_enabled = false
   tags                = {}
   tags_all            = {}
+  force_destroy=true
 
 
 
