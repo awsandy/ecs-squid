@@ -5,6 +5,14 @@ sudo yum update -y >/dev/null
 echo "Update pip"
 sudo pip install --upgrade pip 2 &>/dev/null
 
+# create ecsworkshop-admin role
+profile_name="ecsworkshop-admin"
+aws iam create-role --role-name $profile_name --assume-role-policy-document file://trust-policy.json
+aws iam attach-role-policy --role-name $profile_name --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
+aws iam create-instance-profile --instance-profile-name $profile_name
+aws iam add-role-to-instance-profile --instance-profile-name $profile_name --role-name $profile_name
+
+
 #
 echo "Uninstall AWS CLI v1"
 sudo /usr/local/bin/pip uninstall awscli -y 2 &>/dev/null
@@ -17,6 +25,16 @@ echo "alias aws='/usr/local/bin/aws'" >>~/.bash_profile
 source ~/.bash_profile
 rm -f awscliv2.zip
 rm -rf aws
+
+
+
+# create ecsworkshop-admin role
+profile_name="ecsworkshop-admin"
+aws iam create-role --role-name $profile_name --assume-role-policy-document file://trust-policy.json
+aws iam attach-role-policy --role-name profile_name --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
+aws iam create-instance-profile --instance-profile-name $profile_name
+aws iam add-role-to-instance-profile --instance-profile-name $profile_name --role-name $profile_name
+
 
 # setup for AWS cli
 export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)
@@ -128,34 +146,24 @@ echo "Enable bash_completion"
 echo "alias tfb='terraform init && terraform plan -out tfplan && terraform apply tfplan'" >>~/.bash_profile
 echo "alias aws='/usr/local/bin/aws'" >>~/.bash_profile
 source ~/.bash_profile
-#
-echo "export AWS_DEFAULT_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r .region)" >>~/.bashrc
-echo "export AWS_REGION=\$AWS_DEFAULT_REGION" >>~/.bashrc
-echo "export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)" >>~/.bashrc
-source ~/.bashrc
-test -n "$AWS_REGION" && echo AWS_REGION is "$AWS_REGION" || echo AWS_REGION is not set
 
-echo "export AWS_ACCOUNT_ID=${AWS_ACCOUNT_ID}" | tee -a ~/.bash_profile
-echo "export AWS_REGION=${AWS_REGION}" | tee -a ~/.bash_profile
-aws configure set default.region ${AWS_REGION}
-aws configure get default.region
 
-test -n "$AWS_REGION" && echo "PASSED: AWS_REGION is $AWS_REGION" || echo AWS_REGION is not set !!
-test -n "$TF_VAR_region" && echo "PASSED: TF_VAR_region is $TF_VAR_region" || echo TF_VAR_region is not set !!
-test -n "$ACCOUNT_ID" && echo "PASSED: ACCOUNT_ID is $ACCOUNT_ID" || echo ACCOUNT_ID is not set !!
-echo "setup tools run" >>~/setup-tools.log
 
-# create ecsworkshop-admin role
-profile_name="ecsworkshop-admin"
-aws iam create-role --role-name $profile_name --assume-role-policy-document file://trust-policy.json
-aws iam attach-role-policy --role-name profile_name --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
-aws iam create-instance-profile --instance-profile-name $profile_name
-aws iam add-role-to-instance-profile --instance-profile-name $profile_name --role-name $profile_name
+
+
+## CDK
+
+# Install prerequisite packages
+sudo yum -y install jq nodejs siege
+
+# Install cdk packages
+pip3 install --user --upgrade awslogs
+
 
 instance_id=$(curl -sS http://169.254.169.254/latest/meta-data/instance-id)
 ipa=$(aws ec2 describe-instances --instance-ids $instance_id --query Reservations[].Instances[].IamInstanceProfile | jq -r .[].Arn)
 iip=$(aws ec2 describe-iam-instance-profile-associations --filters "Name=instance-id,Values=$instance_id" --query IamInstanceProfileAssociations[].AssociationId | jq -r .[])
-#echo "Associate $profile_name"
+echo "Associate $profile_name"
 if aws ec2 replace-iam-instance-profile-association --iam-instance-profile "Name=$profile_name" --association-id $iip; then
 if aws cloud9 update-environment --environment-id $C9_PID --managed-credentials-action DISABLE 2>/dev/null; then
   rm -vf ${HOME}/.aws/credentials
@@ -165,13 +173,9 @@ else
   echo "ERROR: Encountered error associating instance profile ecsworkshop-admin with Cloud9 environment"
 fi
 
-## CDK
 
-# Install prerequisite packages
-sudo yum -y install jq nodejs siege
 
-# Install cdk packages
-pip3 install --user --upgrade awslogs
+
 
 #  Verify environment variables required to communicate with AWS API's via the cli tools
 grep AWS_DEFAULT_REGION ~/.bashrc
@@ -189,7 +193,47 @@ if [ $? -ne 0 ]; then
   echo "export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)" >>~/.bashrc
 fi
 
+
+#
+echo "export AWS_DEFAULT_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r .region)" >>~/.bashrc
+echo "export AWS_REGION=\$AWS_DEFAULT_REGION" >>~/.bashrc
+
+source ~/.bashrc
+test -n "$AWS_REGION" && echo AWS_REGION is "$AWS_REGION" || echo AWS_REGION is not set
+
+echo "export AWS_ACCOUNT_ID=${AWS_ACCOUNT_ID}" | tee -a ~/.bash_profile
+echo "export AWS_REGION=${AWS_REGION}" | tee -a ~/.bash_profile
+aws configure set default.region ${AWS_REGION}
+aws configure get default.region
+
+test -n "$AWS_REGION" && echo "PASSED: AWS_REGION is $AWS_REGION" || echo AWS_REGION is not set !!
+test -n "$TF_VAR_region" && echo "PASSED: TF_VAR_region is $TF_VAR_region" || echo TF_VAR_region is not set !!
+test -n "$ACCOUNT_ID" && echo "PASSED: ACCOUNT_ID is $ACCOUNT_ID" || echo ACCOUNT_ID is not set !!
+
+
+
+
 source ~/.bashrc
 ## IAM roles
 aws iam get-role --role-name "AWSServiceRoleForElasticLoadBalancing" || aws iam create-service-linked-role --aws-service-name "elasticloadbalancing.amazonaws.com"
 aws iam get-role --role-name "AWSServiceRoleForECS" || aws iam create-service-linked-role --aws-service-name "ecs.amazonaws.com"
+
+echo "setup tools run" >>~/setup-tools.log
+
+echo "Checking workshop setup ..."
+instid=`curl -s -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/instance-id`
+iname=$(aws ec2 describe-tags --filters "Name=resource-type,Values=instance" "Name=resource-id,Values=$instid" | jq -r '.Tags[] | select(.Key=="Name").Value')
+echo $iname| grep 'eks-terraform\|-Project-mod-' -q && echo "PASSED: Cloud9 IDE name is valid " || echo "ERROR: Cloud9 IDE name invalid! - DO NOT PROCEED"
+#echo $instid
+aws sts get-caller-identity --query Arn | grep eksworkshop-admin -q && echo "PASSED: IAM role valid" || (echo "ERROR: IAM role not valid - DO NOT PROCEED"  && echo "Check Cloud9 AWS Managed temporary credentials are disabled - in AWS Settings")
+ip=`aws ec2 describe-iam-instance-profile-associations --filters "Name=instance-id,Values=$instid" | jq .IamInstanceProfileAssociations[0].IamInstanceProfile.Arn | rev | cut -f1 -d'/' | rev | tr -d '"'`
+#echo "Instance Profile=$ip"
+if [ "$ip" != "eksworkshop-admin" ] ; then
+echo "ERROR: Could not find Instance profile eksworkshop-admin - DO NOT PROCEED"
+exit
+else
+echo "PASSED: Found Instance profile $ip - proceed with the workshop"
+fi
+
+
+
