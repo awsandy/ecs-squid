@@ -25,7 +25,7 @@ resource "aws_ssm_parameter" "squid-execution-role" {
   name        = "/ecsworkshop/squid-execution-role"
   description = "The execution role"
   type        = "String"
-  value       = aws_iam_role.r-squid-ecr-ECSTaskExecutionRole-BSNU23J2XF0S.arn
+  value       = aws_iam_role.r-squid-ecr-ECSTaskExecutionRole-BSNU23J2XF0S.name
 
   tags = {
     workshop = "ecs-workshop"
