@@ -15,7 +15,7 @@ resource "null_resource" "load_ecr" {
   triggers = {
     always_run = timestamp()
   }
-  #depends_on = [aws_ecr_repository.busybox]
+  depends_on = [aws_ecr_repository.this]
   provisioner "local-exec" {
     on_failure  = fail
     when        = create
