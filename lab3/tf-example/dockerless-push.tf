@@ -11,16 +11,20 @@ data "aws_ecr_authorization_token" "temporary" {
   registry_id = data.aws_caller_identity.current.account_id
 }
 
-provider "dockerless" {
-  registry_auth = {
-    "${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com" = {
-      username = data.aws_ecr_authorization_token.temporary.user_name
-      password = data.aws_ecr_authorization_token.temporary.password
-    }
+resource "null_resource" "load_ecr" {
+  triggers = {
+    always_run = timestamp()
   }
-}
+  #depends_on = [aws_ecr_repository.busybox]
+  provisioner "local-exec" {
+    on_failure  = fail
+    when        = create
+    interpreter = ["/bin/bash", "-c"]
+    command     = <<EOT
 
-resource "dockerless_remote_image" "this" {
-  source = format("%s:latest",var.app_name)
-  target = format("%s:%s",aws_ecr_repository.this.repository_url,var.app_name)
+
+
+        echo "************************************************************************************"
+     EOT
+  }
 }
