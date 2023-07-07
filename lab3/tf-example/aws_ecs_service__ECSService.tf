@@ -28,8 +28,8 @@ resource "aws_ecs_service" "squid-ecr-ECSCluster__squid-ecr-ECSService-Kf9lgxSDQ
   }
 
   load_balancer {
-    container_name   = "squid-ecr-SquidProxyContainer"
-    container_port   = 3128
+    container_name   = var.my-app
+    container_port   = var.container_port
     target_group_arn = data.aws_ssm_parameter.squid-tg.value
   }
 
