@@ -10,11 +10,11 @@ variable "app_name" {
 
            
 variable "container_port" {
-  type    = string
-  default = "80"
+  type    = number
+  default = 8080
 }
 
 variable "host_port" {
-  type    = string
-  default = "80"
+  type    = number
+  default = 8080
 }
