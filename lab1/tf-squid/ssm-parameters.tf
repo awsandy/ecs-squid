@@ -88,7 +88,7 @@ resource "aws_ssm_parameter" "squid-tg" {
   description = "The squid cluster cloudwatch log group"
   type        = "String"
 
-  value       = aws_lb_target_group.arn_aws_elasticloadbalancing_targetgroup_squid-ecr.name
+  value       = aws_lb_target_group.arn_aws_elasticloadbalancing_targetgroup_squid-ecr.arn
 
   tags = {
     workshop = "ecs-workshop"
