@@ -182,7 +182,7 @@ aws iam get-role --role-name "AWSServiceRoleForElasticLoadBalancing" &>/dev/null
 aws iam get-role --role-name "AWSServiceRoleForECS" &>/dev/null || (aws iam create-service-linked-role --aws-service-name "ecs.amazonaws.com" &> /dev/null)
 
 
-echo "For final checks - run ./check"
+echo "For final checks - run scripts/check.sh"
 #
 
 
