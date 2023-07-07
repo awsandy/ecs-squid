@@ -3,5 +3,6 @@ data "aws_ecs_cluster" "cluster" {
 }
 
 data "aws_iam_role" "execution-role" {
-  name = var.execution_role_name
+  name = data.aws_ssm_parameter.squid-execution-role.value
 }
+

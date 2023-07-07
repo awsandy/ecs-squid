@@ -24,24 +24,24 @@ resource "aws_ecs_task_definition" "my-ECSTaskDefinition" {
           retries  = 2
           timeout  = 3
         }
-        image = format("%s.dkr.ecr.%s.amazonaws.com/squid-ecr-ecrrepository:latest", data.aws_caller_identity.current.account_id, data.aws_region.current.name)
+        image = format("%s.dkr.ecr.%s.amazonaws.com/%s:latest", data.aws_caller_identity.current.account_id, data.aws_region.current.name,var.app_name)
         links = []
         logConfiguration = {
           logDriver = "awslogs"
           options = {
-            awslogs-group         = aws_cloudwatch_log_group.squid-ecr-ECSTaskLogGroup-s2EMEBzWf9GA.name
-            awslogs-region        = "eu-west-1"
-            awslogs-stream-prefix = "sqProxy"
+            awslogs-group         = data.aws_ssm_parameter.squid-loggroup.value
+            awslogs-region        = data.aws_region.current.name
+            awslogs-stream-prefix = var.app_name
           }
           secretOptions = []
         }
         memory      = 256
         mountPoints = []
-        name        = "squid-ecr-SquidProxyContainer"
+        name        = var.app_name
         portMappings = [
           {
-            containerPort = 3128
-            hostPort      = 3128
+            containerPort = var.container_port
+            hostPort      = var.host_port
             protocol      = "tcp"
           },
         ]
@@ -53,8 +53,8 @@ resource "aws_ecs_task_definition" "my-ECSTaskDefinition" {
     ]
   )
   cpu                = "256"
-  execution_role_arn = aws_iam_role.r-squid-ecr-ECSTaskExecutionRole-BSNU23J2XF0S.arn
-  family             = "squid-ecr-ECSTaskDefinition"
+  execution_role_arn = data.aws_iam_role.execution-role.arn
+  family             = var.app_name
   memory             = "512"
   network_mode       = "awsvpc"
   requires_compatibilities = [
@@ -62,5 +62,5 @@ resource "aws_ecs_task_definition" "my-ECSTaskDefinition" {
   ]
   tags          = {}
   tags_all      = {}
-  task_role_arn = aws_iam_role.r-squid-ecr-ECSTaskExecutionRole-BSNU23J2XF0S.arn
+  task_role_arn = data.aws_iam_role.execution-role.arn
 }

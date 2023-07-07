@@ -30,17 +30,17 @@ resource "aws_ecs_service" "squid-ecr-ECSCluster__squid-ecr-ECSService-Kf9lgxSDQ
   load_balancer {
     container_name   = "squid-ecr-SquidProxyContainer"
     container_port   = 3128
-    target_group_arn = aws_lb_target_group.arn_aws_elasticloadbalancing_targetgroup_squid-ecr.arn
+    target_group_arn = data.aws_ssm_parameter.squid-tg.value
   }
 
   network_configuration {
     assign_public_ip = false
     security_groups = [
-      aws_security_group.sg-0b7aada9480a491f5.id,
+      data.aws_ssm_parameter.squid-sg.value,
     ]
     subnets = [
-      aws_subnet.subnet-0445458c15388c163.id,
-      aws_subnet.subnet-08aae867856e9c1ac.id,
+      data.aws_ssm_parameter.squid-subnet1.value,
+      data.aws_ssm_parameter.squid-subnet2.value,
     ]
   }
 }

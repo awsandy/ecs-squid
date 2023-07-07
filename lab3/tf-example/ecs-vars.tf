@@ -3,13 +3,18 @@ variable "cluster_name" {
   default = "squid-ecr-ECSCluster"
 }
 
-
 variable "app_name" {
   type    = string
   default = "my-app"
 }
 
-variable "execution_role_name" {
+           
+variable "container_port" {
   type    = string
-  default = data.ssm_parameter.execution_role.value
+  default = "80"
+}
+
+variable "host_port" {
+  type    = string
+  default = "80"
 }
