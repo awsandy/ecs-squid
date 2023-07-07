@@ -21,6 +21,6 @@ provider "dockerless" {
 }
 
 resource "dockerless_remote_image" "this" {
-  source = "my-app:latest"
+  source = format("%s:latest",var.app_name)
   target = format("%s:%s",aws_ecr_repository.this.repository_url,var.app_name)
 }
