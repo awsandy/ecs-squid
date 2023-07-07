@@ -2,7 +2,7 @@
 # aws_subnet.subnet-0445458c15388c163:
 resource "aws_subnet" "subnet-0445458c15388c163" {
   assign_ipv6_address_on_creation                = false
-  availability_zone                              = "eu-west-2b"
+  availability_zone                              = "eu-west-1b"
   cidr_block                                     = "10.0.2.0/24"
   enable_dns64                                   = false
   enable_resource_name_dns_a_record_on_launch    = false

@@ -84,15 +84,15 @@ echo 'Stack ecsworkshop-base Importing 40 of 53 ..'
 echo 'Stack ecsworkshop-base Importing 41 of 53 ..'
 ../../scripts/050-get-iam-roles.sh ecsworkshop-base-InstanceSSMCBFA3CF0-N0K8YHX2VEUM
 echo 'Stack ecsworkshop-base Importing 42 of 53 ..'
-../../scripts/get-ecs-service.sh arn:aws:ecs:eu-west-2:566972129213:service/container-demo/mesh-gw-proxy
+../../scripts/get-ecs-service.sh arn:aws:ecs:eu-west-1:566972129213:service/container-demo/mesh-gw-proxy
 echo 'Stack ecsworkshop-base Importing 43 of 53 ..'
 ../../scripts/get-sd-service.sh srv-y7eei2jrbpto3ryy
 echo 'Stack ecsworkshop-base Importing 44 of 53 ..'
-../../scripts/elbv2.sh arn:aws:elasticloadbalancing:eu-west-2:566972129213:loadbalancer/net/ecswo-MeshG-FLLW6SVH5ZXC/931d0198707acc37
+../../scripts/elbv2.sh arn:aws:elasticloadbalancing:eu-west-1:566972129213:loadbalancer/net/ecswo-MeshG-FLLW6SVH5ZXC/931d0198707acc37
 echo 'Stack ecsworkshop-base Importing 45 of 53 ..'
-../../scripts/elbv2_listener.sh arn:aws:elasticloadbalancing:eu-west-2:566972129213:listener/net/ecswo-MeshG-FLLW6SVH5ZXC/931d0198707acc37/9db189ec3902ca54
+../../scripts/elbv2_listener.sh arn:aws:elasticloadbalancing:eu-west-1:566972129213:listener/net/ecswo-MeshG-FLLW6SVH5ZXC/931d0198707acc37/9db189ec3902ca54
 echo 'Stack ecsworkshop-base Importing 46 of 53 ..'
-../../scripts/elbv2-target-groups.sh arn:aws:elasticloadbalancing:eu-west-2:566972129213:targetgroup/ecswor-MeshG-MJA2UCVRN7TB/b9c93bfa2c16729f
+../../scripts/elbv2-target-groups.sh arn:aws:elasticloadbalancing:eu-west-1:566972129213:targetgroup/ecswor-MeshG-MJA2UCVRN7TB/b9c93bfa2c16729f
 echo 'Stack ecsworkshop-base Importing 47 of 53 ..'
 ../../scripts/110-get-security-group.sh sg-0838ad2e105c5c736
 echo 'Stack ecsworkshop-base Importing 48 of 53 ..'

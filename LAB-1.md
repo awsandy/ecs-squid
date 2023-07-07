@@ -20,7 +20,7 @@ terraform apply tfplan
 
 Using the console find and explore these resources
 
-* [The ECS Clusters](https://eu-west-2.console.aws.amazon.com/ecs/v2/clusters)
+* [The ECS Clusters](https://eu-west-1.console.aws.amazon.com/ecs/v2/clusters)
 * ECS service
 * ECS tasks
 * Task definitions
@@ -96,12 +96,12 @@ terraform apply tfplan
 ----------
 
 
-Connect to the insytance via [SSM Fleet](https://eu-west-2.console.aws.amazon.com/systems-manager/managed-instances?region=eu-west-2)
+Connect to the insytance via [SSM Fleet](https://eu-west-1.console.aws.amazon.com/systems-manager/managed-instances?region=eu-west-1)
 
 From the OS prompt:
 
 ```bash
-proxyurl=$(aws ssm get-parameter --name /ecsworkshop/proxy-dns --region eu-west-2 --query Parameter.Value --output text)
+proxyurl=$(aws ssm get-parameter --name /ecsworkshop/proxy-dns --region eu-west-1 --query Parameter.Value --output text)
 export http_proxy=http://${proxyurl}:3128
 export https_proxy=http://${proxyurl}:3128
 ```

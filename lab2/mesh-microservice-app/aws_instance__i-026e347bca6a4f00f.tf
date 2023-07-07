@@ -3,7 +3,7 @@
 resource "aws_instance" "i-026e347bca6a4f00f" {
   ami                                  = "ami-09102fbce920ce7cb"
   associate_public_ip_address          = false
-  availability_zone                    = "eu-west-2a"
+  availability_zone                    = "eu-west-1a"
   disable_api_stop                     = false
   disable_api_termination              = false
   ebs_optimized                        = false

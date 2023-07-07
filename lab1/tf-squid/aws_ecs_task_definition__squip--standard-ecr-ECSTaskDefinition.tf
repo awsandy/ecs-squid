@@ -30,7 +30,7 @@ resource "aws_ecs_task_definition" "squid--standard-ecr-ECSTaskDefinition" {
           logDriver = "awslogs"
           options = {
             awslogs-group         = aws_cloudwatch_log_group.squid-ecr-ECSTaskLogGroup-s2EMEBzWf9GA.name
-            awslogs-region        = "eu-west-2"
+            awslogs-region        = "eu-west-1"
             awslogs-stream-prefix = "sqProxy"
           }
           secretOptions = []

@@ -29,7 +29,7 @@ resource "aws_ecs_service" "container-demo__mesh-gw-proxy" {
   load_balancer {
     container_name   = "envoy"
     container_port   = 3000
-    target_group_arn = aws_lb_target_group.arn_aws_elasticloadbalancing_eu-west-2_566972129213_targetgroup_ecswor-MeshG-MJA2UCVRN7TB_b9c93bfa2c16729f.arn
+    target_group_arn = aws_lb_target_group.arn_aws_elasticloadbalancing_eu-west-1_566972129213_targetgroup_ecswor-MeshG-MJA2UCVRN7TB_b9c93bfa2c16729f.arn
   }
 
   network_configuration {
