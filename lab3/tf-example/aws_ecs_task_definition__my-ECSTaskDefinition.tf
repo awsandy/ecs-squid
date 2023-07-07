@@ -12,7 +12,12 @@ resource "aws_ecs_task_definition" "my-ECSTaskDefinition" {
         dockerLabels          = {}
         dockerSecurityOptions = []
         entryPoint            = []
-        environment           = []
+        environment           = [
+                {
+                    "name": "PORT",
+                    "value": "8080"
+                }
+            ],
         environmentFiles      = []
         essential             = true
         extraHosts            = []
