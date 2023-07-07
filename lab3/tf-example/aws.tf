@@ -20,8 +20,5 @@ provider "aws" {
 }
 
 
-provider "dockerless" {
-  # Configuration options
-}
 
 
