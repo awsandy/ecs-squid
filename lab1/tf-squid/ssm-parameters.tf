@@ -19,3 +19,15 @@ resource "aws_ssm_parameter" "squid-endpointservice" {
     workshop = "ecs-workshop"
   }
 }
+
+
+resource "aws_ssm_parameter" "squid-execution-role" {
+  name        = "/ecsworkshop/squid-execution-role"
+  description = "The execution role"
+  type        = "String"
+  value       = aws_iam_role.r-squid-ecr-ECSTaskExecutionRole-BSNU23J2XF0S.arn
+
+  tags = {
+    workshop = "ecs-workshop"
+  }
+}
