@@ -6,7 +6,6 @@ data "aws_ssm_parameter" "squid-loggroup" {
   name        = "/ecsworkshop/squid-loggroup"
 }
 
-
 data "aws_ssm_parameter" "squid-subnet1" {
   name        = "/ecsworkshop/squid-subnet1"
 }
@@ -18,7 +17,6 @@ data "aws_ssm_parameter" "squid-subnet2" {
 data "aws_ssm_parameter" "squid-sg" {
   name        = "/ecsworkshop/squid-sg"
 }
-
 
 data "aws_ssm_parameter" "squid-tg" {
   name        = "/ecsworkshop/squid-tg"
