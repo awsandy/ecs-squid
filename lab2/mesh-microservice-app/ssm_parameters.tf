@@ -17,3 +17,14 @@ resource "aws_ssm_parameter" "meshlb-arn" {
     workshop = "ecs-workshop"
   }
 }
+
+resource "aws_ssm_parameter" "meshlb-vpc" {
+  name        = "/ecsworkshop/meshlb-vpc"
+  description = "The mesh lb vpc"
+  type        = "String"
+  value       = aws_vpc.vpc-057a64aaa8d96235b.id
+  tags = {
+    workshop = "ecs-workshop"
+  }
+}
+

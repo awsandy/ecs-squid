@@ -33,3 +33,7 @@ data "aws_ssm_parameter" "squid-lbarn" {
 data "aws_ssm_parameter" "meshlb-arn" {
   name        = "/ecsworkshop/meshlb-arn"
 }
+
+data "aws_ssm_parameter" "meshlb-vpc" {
+  name        = "/ecsworkshop/meshlb-vpc"
+}

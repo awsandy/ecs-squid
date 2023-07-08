@@ -12,8 +12,8 @@ resource "aws_lb_target_group" "app" {
   tags                              = {}
   tags_all                          = {}
   target_type                       = "ip"
-  vpc_id                            = data.aws_ssm_parameter.squid-vpc.value
-
+  #vpc_id                            = data.aws_ssm_parameter.squid-vpc.value
+  vpc_id =                          data.aws_ssm_parameter.meshlb-vpc.value
   health_check {
     enabled             = true
     healthy_threshold   = 5
