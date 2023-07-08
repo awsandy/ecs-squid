@@ -59,6 +59,6 @@ data "aws_ssm_parameter" "squid-lbarn" {
 }
 
 
-resource  "aws_ssm_parameter" "mesh-execution-role" {
-  name        = "/ecsworkshop/mesh-execution-role"
-}
+#resource  "aws_ssm_parameter" "mesh-execution-role" {
+#  name        = "/ecsworkshop/mesh-execution-role"
+#}
