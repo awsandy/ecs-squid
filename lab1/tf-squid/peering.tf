@@ -34,57 +34,41 @@ resource "aws_route" "rt-squid" {
   vpc_peering_connection_id = aws_vpc_peering_connection.def-peer.id
 }
 
-resource "aws_security_group_rule" "vpc-443" {
+resource "aws_security_group_rule" "vpc-all-in" {
   type              = "ingress"
-  from_port         = 443
-  to_port           = 443
-  protocol          = "tcp"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
   cidr_blocks       = [data.aws_vpc.vpc-default.cidr_block]
   security_group_id = aws_security_group.sg-0b7aada9480a491f5.id
 }
 
-resource "aws_security_group_rule" "def-443" {
+resource "aws_security_group_rule" "def-all-in" {
   type              = "ingress"
-  from_port         = 443
-  to_port           = 443
+  from_port         = 0
+  to_port           = 0
   protocol          = "tcp"
   cidr_blocks       = [aws_vpc.vpc-090fcf5a7a3b94d20.cidr_block]
   security_group_id = data.aws_security_group.default.id
 }
 
-resource "aws_security_group_rule" "vpc-8080" {
-  type              = "ingress"
-  from_port         = 8080
-  to_port           = 8080
-  protocol          = "tcp"
+resource "aws_security_group_rule" "vpc-all-out" {
+  type              = "egress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
   cidr_blocks       = [data.aws_vpc.vpc-default.cidr_block]
   security_group_id = aws_security_group.sg-0b7aada9480a491f5.id
 }
 
-resource "aws_security_group_rule" "def-8080" {
-  type              = "ingress"
-  from_port         = 8080
-  to_port           = 8080
+resource "aws_security_group_rule" "def-all-out" {
+  type              = "egress"
+  from_port         = 0
+  to_port           = 0
   protocol          = "tcp"
   cidr_blocks       = [aws_vpc.vpc-090fcf5a7a3b94d20.cidr_block]
   security_group_id = data.aws_security_group.default.id
 }
 
 
-resource "aws_security_group_rule" "vpc-3128" {
-  type              = "ingress"
-  from_port         = 3128
-  to_port           = 3128
-  protocol          = "tcp"
-  cidr_blocks       = [data.aws_vpc.vpc-default.cidr_block]
-  security_group_id = aws_security_group.sg-0b7aada9480a491f5.id
-}
 
-resource "aws_security_group_rule" "def-3128" {
-  type              = "ingress"
-  from_port         = 3128
-  to_port           = 3128
-  protocol          = "tcp"
-  cidr_blocks       = [aws_vpc.vpc-090fcf5a7a3b94d20.cidr_block]
-  security_group_id = data.aws_security_group.default.id
-}
