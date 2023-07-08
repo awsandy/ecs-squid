@@ -35,7 +35,7 @@ resource "aws_ecs_task_definition" "my-ECSTaskDefinition" {
         logConfiguration = {
           logDriver = "awslogs"
           options = {
-            awslogs-group         = data.aws_ssm_parameter.squid-loggroup.value
+            awslogs-group         = data.aws_ssm_parameter.mesh-loggroup.value
             awslogs-region        = data.aws_region.current.name
             awslogs-stream-prefix = var.app_name
           }

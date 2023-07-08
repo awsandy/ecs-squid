@@ -106,4 +106,16 @@ resource  "aws_ssm_parameter" "mesh-execution-role" {
 
 }
 
+resource "aws_ssm_parameter" "mesh-loggroup" {
+  name        = "/ecsworkshop/mesh-loggroup"
+  description = "The squid cluster cloudwatch log group"
+  type        = "String"
+
+  value       = aws_cloudwatch_log_group.ecsworkshop-app.name
+  
+  tags = {
+    workshop = "ecs-workshop"
+  }
+}
+
 

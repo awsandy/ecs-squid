@@ -29,3 +29,8 @@ data  "aws_ssm_parameter" "mesh-cluster" {
 data  "aws_ssm_parameter" "mesh-execution-role" {
   name        = "/ecsworkshop/mesh-execution-role"
 }
+
+
+data "aws_ssm_parameter" "mesh-loggroup" {
+  name        = "/ecsworkshop/mesh-loggroup"
+}
