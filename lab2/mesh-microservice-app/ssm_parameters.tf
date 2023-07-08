@@ -92,4 +92,18 @@ resource  "aws_ssm_parameter" "mesh-cluster" {
 
 }
 
+resource  "aws_ssm_parameter" "mesh-execution-role" {
+  name        = "/ecsworkshop/mesh-execution-role"
+  description = "The squid cluster security group"
+  type        = "String"
+
+  value       = aws_iam_role.r-ecsworkshop-frontend-FrontEndTaskDefExecutionRole3-11S67VJCT4IOG.name
+
+
+  tags = {
+    workshop = "ecs-workshop"
+  }
+
+}
+
 
