@@ -2,7 +2,7 @@
 # aws_vpc.vpc-057a64aaa8d96235b:
 resource "aws_vpc" "vpc-057a64aaa8d96235b" {
   assign_generated_ipv6_cidr_block     = false
-  cidr_block                           = "10.0.0.0/24"
+  cidr_block                           = "10.1.0.0/24"
   enable_dns_hostnames                 = true
   enable_dns_support                   = true
   enable_network_address_usage_metrics = false
