@@ -9,3 +9,13 @@ resource "aws_security_group_rule" "sg-0f7e3ec5d7c01ab3b_ingress_2" {
   to_port           = 3000
   type              = "ingress"
 }
+
+resource "aws_security_group_rule" "sg-0f7e3ec5d7c01ab3b_ingress_2a" {
+  from_port         = 8080
+  prefix_list_ids   = []
+  protocol          = "tcp"
+  security_group_id = aws_security_group.sg-0f7e3ec5d7c01ab3b.id
+  self              = true
+  to_port           = 8080
+  type              = "ingress"
+}
