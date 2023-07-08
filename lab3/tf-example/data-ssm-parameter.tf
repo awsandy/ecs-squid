@@ -51,7 +51,7 @@ data "aws_ssm_parameter" "mesh-subnet3" {
 }
 
 data "aws_ssm_parameter" "mesh-sg" {
-  name        = "/ecsworkshop/squid-sg"
+  name        = "/ecsworkshop/mesh-sg"
 }
 
 data  "aws_ssm_parameter" "mesh-cluster" {
