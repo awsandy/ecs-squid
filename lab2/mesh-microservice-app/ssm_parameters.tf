@@ -67,7 +67,7 @@ resource "aws_ssm_parameter" "mesh-subnet3" {
 
 
 resource "aws_ssm_parameter" "mesh-sg" {
-  name        = "/ecsworkshop/squid-sg"
+  name        = "/ecsworkshop/mesh-sg"
   description = "The squid cluster security group"
   type        = "String"
 
