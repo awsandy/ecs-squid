@@ -3,7 +3,7 @@
 resource "aws_subnet" "subnet-0a5216ba6c4a20153" {
   assign_ipv6_address_on_creation                = false
   availability_zone                              = "eu-west-1c"
-  cidr_block                                     = "10.0.0.160/27"
+  cidr_block                                     = "10.1.0.160/27"
   enable_dns64                                   = false
   enable_resource_name_dns_a_record_on_launch    = false
   enable_resource_name_dns_aaaa_record_on_launch = false
