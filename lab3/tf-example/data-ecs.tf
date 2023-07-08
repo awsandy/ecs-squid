@@ -1,5 +1,5 @@
 data "aws_ecs_cluster" "cluster" {
-  cluster_name = var.cluster_name
+  cluster_name = data.aws_ssm_parameter.mesh-cluster.value
 }
 
 data "aws_iam_role" "execution-role" {
