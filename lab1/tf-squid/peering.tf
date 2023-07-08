@@ -28,14 +28,14 @@ resource "aws_route" "rt-def" {
 }
 
 #  squid to default aws_route_table" "rtb-00c2a3920ce34d43f priv1
-resource "aws_route" "rt-squid" {
+resource "aws_route" "rt-squid1" {
   route_table_id            = aws_route_table.rtb-00c2a3920ce34d43f.id
   destination_cidr_block    = data.aws_vpc.vpc-default.cidr_block
   vpc_peering_connection_id = aws_vpc_peering_connection.def-peer.id
 }
 
 #  squid to default "aws_route_table" "rtb-067ca9457ae19f31d" priv2
-resource "aws_route" "rt-squid" {
+resource "aws_route" "rt-squid2" {
   route_table_id            = aws_route_table.rtb-067ca9457ae19f31d.id
   destination_cidr_block    = data.aws_vpc.vpc-default.cidr_block
   vpc_peering_connection_id = aws_vpc_peering_connection.def-peer.id
