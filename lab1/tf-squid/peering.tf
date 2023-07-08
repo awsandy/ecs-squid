@@ -28,7 +28,7 @@ resource "aws_route" "rt-def" {
 }
 
 #  squid to default
-resource "aws_route" "rt-def" {
+resource "aws_route" "rt-squid" {
   route_table_id            = aws_route_table.rtb-00c2a3920ce34d43f.id
   destination_cidr_block    = data.aws_vpc.vpc-default.eks-cidr
   vpc_peering_connection_id = aws_vpc_peering_connection.def-peer.id
@@ -68,9 +68,10 @@ resource "aws_security_group_rule" "def-8080" {
   protocol          = "tcp"
   cidr_blocks       = [aws_vpc.vpc-090fcf5a7a3b94d20.cidr_block]
   security_group_id = data.aws_security_group.default.id
+}
 
 
-  resource "aws_security_group_rule" "vpc-3128" {
+resource "aws_security_group_rule" "vpc-3128" {
   type              = "ingress"
   from_port         = 3128
   to_port           = 3128
@@ -86,3 +87,4 @@ resource "aws_security_group_rule" "def-3128" {
   protocol          = "tcp"
   cidr_blocks       = [aws_vpc.vpc-090fcf5a7a3b94d20.cidr_block]
   security_group_id = data.aws_security_group.default.id
+}
