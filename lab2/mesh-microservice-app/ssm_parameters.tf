@@ -84,7 +84,7 @@ resource  "aws_ssm_parameter" "mesh-cluster" {
   description = "The squid cluster security group"
   type        = "String"
 
-  value       = aws_ecs_cluster_capacity_providers.container-demo.name
+  value       = aws_ecs_cluster.container-demo.name
 
   tags = {
     workshop = "ecs-workshop"
