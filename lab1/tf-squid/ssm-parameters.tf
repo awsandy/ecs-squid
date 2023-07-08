@@ -94,3 +94,27 @@ resource "aws_ssm_parameter" "squid-tg" {
     workshop = "ecs-workshop"
   }
 }
+
+resource "aws_ssm_parameter" "squid-vpc" {
+  name        = "/ecsworkshop/squid-vpc"
+  description = "The squid vpc id"
+  type        = "String"
+
+  value       = aws_vpc.vpc-090fcf5a7a3b94d20.id
+  tags = {
+    workshop = "ecs-workshop"
+  }
+}
+
+
+resource "aws_ssm_parameter" "squid-lbarn" {
+  name        = "/ecsworkshop/squid-lbarn"
+  description = "The squid load balancer arn"
+  type        = "String"
+
+  value       = aws_lb.arn_aws_elasticloadbalancing_net_squid.arn
+
+  tags = {
+    workshop = "ecs-workshop"
+  }
+}

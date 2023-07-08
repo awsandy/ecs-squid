@@ -23,3 +23,11 @@ data "aws_ssm_parameter" "squid-sg" {
 data "aws_ssm_parameter" "squid-tg" {
   name        = "/ecsworkshop/squid-tg"
 }
+
+data "aws_ssm_parameter" "squid-vpc" {
+  name        = "/ecsworkshop/squid-vpc"
+}
+
+data "aws_ssm_parameter" "squid-lbarn" {
+  name        = "/ecsworkshop/squid-lbarn"
+}
