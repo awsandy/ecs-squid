@@ -15,7 +15,8 @@ resource "aws_iam_role_policy" "r-squid-ecr-CodeBuildServiceRole-13V9IEE48IOCX__
           ]
           Effect = "Allow"
           Resource = [
-            "arn:aws:s3:::squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k*",
+            #"arn:aws:s3:::squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k*",
+            format("%s*",aws_s3_bucket.b_squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k.arn),
           ]
         },
       ]

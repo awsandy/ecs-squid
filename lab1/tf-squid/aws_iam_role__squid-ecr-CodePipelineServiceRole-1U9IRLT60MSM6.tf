@@ -81,7 +81,8 @@ resource "aws_iam_role" "r-squid-ecr-CodePipelineServiceRole-1U9IRLT60MSM6" {
               "s3:GetObject",
             ]
             Effect   = "Allow"
-            Resource = "arn:aws:s3:::squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k/*"
+            Resource = format("%s/*",aws_s3_bucket.b_squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k.arn)
+            #Resource = "arn:aws:s3:::squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k/*"
           },
         ]
         Version = "2012-10-17"
