@@ -118,3 +118,14 @@ resource "aws_ssm_parameter" "squid-lbarn" {
     workshop = "ecs-workshop"
   }
 }
+
+
+resource "aws_ssm_parameter" "squid-lbdns" {
+  name        = "/ecsworkshop/squid-lbdns"
+  description = "The mesh lb dns"
+  type        = "String"
+  value       = aws_lb.arn_aws_elasticloadbalancing_net_squid.dns_name
+  tags = {
+    workshop = "ecs-workshop"
+  }
+}
