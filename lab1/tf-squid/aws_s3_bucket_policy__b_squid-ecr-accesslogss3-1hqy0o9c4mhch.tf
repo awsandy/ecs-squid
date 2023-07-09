@@ -55,7 +55,8 @@ resource "aws_s3_bucket_policy" "b_squid-ecr-accesslogss3-1hqy0o9c4mhch" {
             Service = "logging.s3.amazonaws.com"
           }
           Action = "s3:PutObject"
-          Resource = format("%s/codeartifactstores3*",aws_s3_bucket.b_squid-ecr-accesslogss3-1hqy0o9c4mhch.arn)
+          #Resource = format("%s/codeartifactstores3*",aws_s3_bucket.b_squid-ecr-accesslogss3-1hqy0o9c4mhch.arn)
+          Resource = format("%s/*",aws_s3_bucket.b_squid-ecr-accesslogss3-1hqy0o9c4mhch.arn)
           Condition = {
             ArnLike = {
               "aws:SourceArn" = format("%s",aws_s3_bucket.b_squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k.arn)
