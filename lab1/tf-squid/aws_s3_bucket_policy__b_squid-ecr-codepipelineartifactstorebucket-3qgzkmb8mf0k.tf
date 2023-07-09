@@ -13,7 +13,8 @@ resource "aws_s3_bucket_policy" "b_squid-ecr-codepipelineartifactstorebucket-3qg
           }
           Effect    = "Deny"
           Principal = "*"
-          Resource  = "arn:aws:s3:::squid-ecr-*"
+          Resource = format("%s/*",aws_s3_bucket.b_squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k.arn) 
+          #Resource  = "arn:aws:s3:::squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k/*"
           Sid       = "DenyUnEncryptedObjectUploads"
         },
         {
@@ -25,9 +26,15 @@ resource "aws_s3_bucket_policy" "b_squid-ecr-codepipelineartifactstorebucket-3qg
           }
           Effect    = "Deny"
           Principal = "*"
+          #Resource = [
+          #  "arn:aws:s3:::squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k/*",
+          #  "arn:aws:s3:::squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k",
+          #]
           Resource = [
-            "arn:aws:s3:::squid-ecr-*",
+            format("%s/*,",aws_s3_bucket.b_squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k.arn)
+            format("%s",aws_s3_bucket.b_squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k.arn)
           ]
+
           Sid = "DenyInsecureConnections"
         },
       ]

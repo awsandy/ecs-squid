@@ -13,8 +13,13 @@ resource "aws_s3_bucket_policy" "b_squid-ecr-accesslogss3-1hqy0o9c4mhch" {
           }
           Effect    = "Deny"
           Principal = "*"
+          #Resource = [
+          #  "arn:aws:s3:::squid-ecr-accesslogss3-1hqy0o9c4mhch/*",
+          #  "arn:aws:s3:::squid-ecr-accesslogss3-1hqy0o9c4mhch",
+          #]
           Resource = [
-            "arn:aws:s3:::squid-ecr-accesslogss3*",
+            format("%s/*,",aws_s3_bucket.b_squid-ecr-accesslogss3-1hqy0o9c4mhch.arn)
+            format("%s,",aws_s3_bucket.b_squid-ecr-accesslogss3-1hqy0o9c4mhch.arn)
           ]
           Sid = "Denyhttp"
         },
@@ -29,7 +34,8 @@ resource "aws_s3_bucket_policy" "b_squid-ecr-accesslogss3-1hqy0o9c4mhch" {
           Principal = {
             Service = "delivery.logs.amazonaws.com"
           }
-          Resource = "arn:aws:s3:::squid-ecr-accesslogss3*"
+          # Resource = "arn:aws:s3:::squid-ecr-accesslogss3-1hqy0o9c4mhch/nlb/*"
+          Resource = format("%s/nlb/*,",aws_s3_bucket.b_squid-ecr-accesslogss3-1hqy0o9c4mhch.arn)
           Sid      = "AWSLogDeliveryWrite"
         },
         {
@@ -38,14 +44,15 @@ resource "aws_s3_bucket_policy" "b_squid-ecr-accesslogss3-1hqy0o9c4mhch" {
           Principal = {
             Service = "delivery.logs.amazonaws.com"
           }
-          Resource = "arn:aws:s3:::squid-ecr-accesslogss3*"
+          #Resource = "arn:aws:s3:::squid-ecr-accesslogss3-1hqy0o9c4mhch"
+          Resource = format("%s",aws_s3_bucket.b_squid-ecr-accesslogss3-1hqy0o9c4mhch.arn)
           Sid      = "AWSLogDeliveryAclCheck"
         },
         {
           Action = "s3:PutObject"
           Condition = {
             ArnLike = {
-              "aws:SourceArn" = "arn:aws:s3:::squid-ecr-*"
+              "aws:SourceArn" = format("%s",aws_s3_bucket.b_squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k.arn)
             }
             StringEquals = {
               "aws:SourceAccount" = data.aws_caller_identity.current.account_id
@@ -55,7 +62,7 @@ resource "aws_s3_bucket_policy" "b_squid-ecr-accesslogss3-1hqy0o9c4mhch" {
           Principal = {
             Service = "logging.s3.amazonaws.com"
           }
-          Resource = "arn:aws:s3:::squid-ecr-accesslogss3*"
+          Resource = format("%s",aws_s3_bucket.b_squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k.arn)
           Sid      = "S3ServerAccessLogsPolicy"
         },
       ]
