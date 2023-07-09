@@ -14,8 +14,7 @@ resource "aws_s3_bucket_policy" "b_squid-ecr-accesslogss3-1hqy0o9c4mhch" {
           Effect    = "Deny"
           Principal = "*"
           Resource = [
-            "arn:aws:s3:::squid-ecr-accesslogss3-1hqy0o9c4mhch/*",
-            "arn:aws:s3:::squid-ecr-accesslogss3-1hqy0o9c4mhch",
+            "arn:aws:s3:::squid-ecr-accesslogss3*",
           ]
           Sid = "Denyhttp"
         },
@@ -30,7 +29,7 @@ resource "aws_s3_bucket_policy" "b_squid-ecr-accesslogss3-1hqy0o9c4mhch" {
           Principal = {
             Service = "delivery.logs.amazonaws.com"
           }
-          Resource = "arn:aws:s3:::squid-ecr-accesslogss3-1hqy0o9c4mhch/nlb/*"
+          Resource = "arn:aws:s3:::squid-ecr-accesslogss3*"
           Sid      = "AWSLogDeliveryWrite"
         },
         {
@@ -39,14 +38,14 @@ resource "aws_s3_bucket_policy" "b_squid-ecr-accesslogss3-1hqy0o9c4mhch" {
           Principal = {
             Service = "delivery.logs.amazonaws.com"
           }
-          Resource = "arn:aws:s3:::squid-ecr-accesslogss3-1hqy0o9c4mhch"
+          Resource = "arn:aws:s3:::squid-ecr-accesslogss3*"
           Sid      = "AWSLogDeliveryAclCheck"
         },
         {
           Action = "s3:PutObject"
           Condition = {
             ArnLike = {
-              "aws:SourceArn" = "arn:aws:s3:::squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k"
+              "aws:SourceArn" = "arn:aws:s3:::squid-ecr-*"
             }
             StringEquals = {
               "aws:SourceAccount" = data.aws_caller_identity.current.account_id
@@ -56,7 +55,7 @@ resource "aws_s3_bucket_policy" "b_squid-ecr-accesslogss3-1hqy0o9c4mhch" {
           Principal = {
             Service = "logging.s3.amazonaws.com"
           }
-          Resource = "arn:aws:s3:::squid-ecr-accesslogss3-1hqy0o9c4mhch/codeartifactstores3*"
+          Resource = "arn:aws:s3:::squid-ecr-accesslogss3*"
           Sid      = "S3ServerAccessLogsPolicy"
         },
       ]
