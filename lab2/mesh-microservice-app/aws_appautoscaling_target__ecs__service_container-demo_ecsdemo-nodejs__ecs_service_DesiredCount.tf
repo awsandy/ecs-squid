@@ -3,7 +3,9 @@
 resource "aws_appautoscaling_target" "ecs__service_container-demo_ecsdemo-nodejs__ecs_service_DesiredCount" {
   max_capacity       = 9
   min_capacity       = 1
-  resource_id        = "service/container-demo/ecsdemo-nodejs"
+  #resource_id        = "service/container-demo/ecsdemo-nodejs"
+  resource_id        = "service/${aws_ecs_cluster.container-demo.name}/${aws_ecs_service.container-demo__ecsdemo-nodejs.name}"
+
   role_arn           = format("arn:aws:iam::%s:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService", data.aws_caller_identity.current.account_id)
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"

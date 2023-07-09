@@ -3,7 +3,9 @@
 resource "aws_appautoscaling_policy" "ecs__service_container-demo_ecsdemo-frontend__ecs_service_DesiredCount__ecsworkshopfrontendFrontEndFargateServiceTaskCountTargetCPUAutoscalingD024FEBE" {
   name               = "ecsworkshopfrontendFrontEndFargateServiceTaskCountTargetCPUAutoscalingD024FEBE"
   policy_type        = "TargetTrackingScaling"
-  resource_id        = "service/container-demo/ecsdemo-frontend"
+  #resource_id        = "service/container-demo/ecsdemo-frontend"
+  resource_id        = "service/${aws_ecs_cluster.container-demo.name}/${aws_ecs_service.container-demo__ecsdemo-frontend.name}"
+
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
 

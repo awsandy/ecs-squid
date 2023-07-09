@@ -3,7 +3,9 @@
 resource "aws_appautoscaling_policy" "ecs__service_container-demo_ecsdemo-nodejs__ecs_service_DesiredCount__ecsworkshopnodejsNodejsFargateServiceTaskCountTargetCPUAutoscaling4708BC1E" {
   name               = "ecsworkshopnodejsNodejsFargateServiceTaskCountTargetCPUAutoscaling4708BC1E"
   policy_type        = "TargetTrackingScaling"
-  resource_id        = "service/container-demo/ecsdemo-nodejs"
+  #resource_id        = "service/container-demo/ecsdemo-nodejs"
+  resource_id        = "service/${aws_ecs_cluster.container-demo.name}/${aws_ecs_service.container-demo__ecsdemo-nodejs.name}"
+
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
 

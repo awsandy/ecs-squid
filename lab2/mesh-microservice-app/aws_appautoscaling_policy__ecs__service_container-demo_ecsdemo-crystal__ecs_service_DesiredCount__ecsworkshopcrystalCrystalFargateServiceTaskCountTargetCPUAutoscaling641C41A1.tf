@@ -3,7 +3,8 @@
 resource "aws_appautoscaling_policy" "ecs__service_container-demo_ecsdemo-crystal__ecs_service_DesiredCount__ecsworkshopcrystalCrystalFargateServiceTaskCountTargetCPUAutoscaling641C41A1" {
   name               = "ecsworkshopcrystalCrystalFargateServiceTaskCountTargetCPUAutoscaling641C41A1"
   policy_type        = "TargetTrackingScaling"
-  resource_id        = "service/container-demo/ecsdemo-crystal"
+  #resource_id        = "service/container-demo/ecsdemo-crystal"
+  resource_id        = "service/${aws_ecs_cluster.container-demo.name}/${aws_ecs_service.container-demo__ecsdemo-crystal.name}"
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
 
