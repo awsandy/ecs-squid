@@ -35,7 +35,7 @@ resource "aws_s3_bucket_policy" "b_squid-ecr-accesslogss3-1hqy0o9c4mhch" {
             Service = "delivery.logs.amazonaws.com"
           }
           # Resource = "arn:aws:s3:::squid-ecr-accesslogss3-1hqy0o9c4mhch/nlb/*"
-          Resource = format("%s/nlb/*,",aws_s3_bucket.b_squid-ecr-accesslogss3-1hqy0o9c4mhch.arn)
+          Resource = format("%s/nlb/*",aws_s3_bucket.b_squid-ecr-accesslogss3-1hqy0o9c4mhch.arn)
           Sid      = "AWSLogDeliveryWrite"
         },
         {
