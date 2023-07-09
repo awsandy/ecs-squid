@@ -3,7 +3,8 @@
 resource "aws_appautoscaling_policy" "ecs__service_squid-ecr-ECSCluster_squid-ecr-ECSService-Kf9lgxSDQTcT__ecs_service_DesiredCount__squid-ecr-target-tracking-cpu70" {
   name               = "squid-ecr-target-tracking-cpu70"
   policy_type        = "TargetTrackingScaling"
-  resource_id        = "service/squid-ecr-ECSCluster/squid-ecr-ECSService-Kf9lgxSDQTcT"
+  resource_id        = "service/${aws_ecs_cluster.squid-ecr-ECSCluster.name}/${aws_ecs_service.squid-ecr-ECSCluster__squid-ecr-ECSService-Kf9lgxSDQTcT.name}"
+  #resource_id        = "service/squid-ecr-ECSCluster/squid-ecr-ECSService-Kf9lgxSDQTcT"
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
 

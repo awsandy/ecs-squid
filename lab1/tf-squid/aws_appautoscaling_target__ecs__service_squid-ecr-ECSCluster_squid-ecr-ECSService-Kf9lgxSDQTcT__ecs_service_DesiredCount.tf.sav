@@ -3,7 +3,8 @@
 resource "aws_appautoscaling_target" "ecs__service_squid-ecr-ECSCluster_squid-ecr-ECSService-Kf9lgxSDQTcT__ecs_service_DesiredCount" {
   max_capacity       = 20
   min_capacity       = 3
-  resource_id        = "service/squid-ecr-ECSCluster/squid-ecr-ECSService-Kf9lgxSDQTcT"
+  #resource_id        = "service/squid-ecr-ECSCluster/squid-ecr-ECSService-Kf9lgxSDQTcT"
+  resource_id        = "service/${aws_ecs_cluster.squid-ecr-ECSCluster.name}/${aws_ecs_service.squid-ecr-ECSCluster__squid-ecr-ECSService-Kf9lgxSDQTcT.name}"
   role_arn           = format("arn:aws:iam::%s:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService", data.aws_caller_identity.current.account_id)
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
