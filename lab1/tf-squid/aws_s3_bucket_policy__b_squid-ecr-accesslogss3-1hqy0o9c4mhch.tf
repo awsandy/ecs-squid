@@ -18,8 +18,8 @@ resource "aws_s3_bucket_policy" "b_squid-ecr-accesslogss3-1hqy0o9c4mhch" {
           #  "arn:aws:s3:::squid-ecr-accesslogss3-1hqy0o9c4mhch",
           #]
           Resource = [
-            format("%s/*,",aws_s3_bucket.b_squid-ecr-accesslogss3-1hqy0o9c4mhch.arn)
-            format("%s,",aws_s3_bucket.b_squid-ecr-accesslogss3-1hqy0o9c4mhch.arn)
+            format("%s/*",aws_s3_bucket.b_squid-ecr-accesslogss3-1hqy0o9c4mhch.arn),
+            format("%s",aws_s3_bucket.b_squid-ecr-accesslogss3-1hqy0o9c4mhch.arn)
           ]
           Sid = "Denyhttp"
         },

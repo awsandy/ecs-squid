@@ -31,7 +31,7 @@ resource "aws_s3_bucket_policy" "b_squid-ecr-codepipelineartifactstorebucket-3qg
           #  "arn:aws:s3:::squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k",
           #]
           Resource = [
-            format("%s/*,",aws_s3_bucket.b_squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k.arn)
+            format("%s/*",aws_s3_bucket.b_squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k.arn),
             format("%s",aws_s3_bucket.b_squid-ecr-codepipelineartifactstorebucket-3qgzkmb8mf0k.arn)
           ]
 
