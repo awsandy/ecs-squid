@@ -37,7 +37,8 @@ resource "aws_ecs_task_definition" "squid--custom-ecr-ECSTaskDefinition" {
         }
         memory      = 256
         mountPoints = []
-        name        = "squid-ecr-SquidProxyContainer"
+        #name        = "squid-ecr-SquidProxyContainer"
+        name        = "squid-ecr-custom"
         portMappings = [
           {
             containerPort = 3128
@@ -54,7 +55,8 @@ resource "aws_ecs_task_definition" "squid--custom-ecr-ECSTaskDefinition" {
   )
   cpu                = "256"
   execution_role_arn = aws_iam_role.r-squid-ecr-ECSTaskExecutionRole-BSNU23J2XF0S.arn
-  family             = "squid-ecr-ECSTaskDefinition"
+  #family             = "squid-ecr-ECSTaskDefinition"
+  family             = "squid-ecr-custom"
   memory             = "512"
   network_mode       = "awsvpc"
   requires_compatibilities = [
