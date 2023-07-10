@@ -5,6 +5,7 @@ resource "aws_ecr_repository" "squid-ecr-ecrrepository" {
   name                 = "squid-ecr-ecrrepository"
   tags                 = {}
   tags_all             = {}
+  force_delete = true
 
   encryption_configuration {
     encryption_type = "AES256"
