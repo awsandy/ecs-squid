@@ -1,8 +1,5 @@
 
-aws iam create-service-linked-role --aws-service-name ecs.amazonaws.com 2> /dev/null
 # create a user for codecommit
-aws iam create-user --user-name git-user 2> /dev/null
-aws iam attach-user-policy --user-name git-user --policy-arn arn:aws:iam::aws:policy/AWSCodeCommitPowerUser
 usercred=$(aws iam create-service-specific-credential --user-name git-user --service-name codecommit.amazonaws.com) 2> /dev/null
 GIT_USERNAME=$(echo $usercred | jq -r '.ServiceSpecificCredential.ServiceUserName')
 GIT_PASSWORD=$(echo $usercred | jq -r '.ServiceSpecificCredential.ServicePassword')
