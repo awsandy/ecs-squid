@@ -24,7 +24,7 @@ resource "aws_ecs_task_definition" "squid--custom-ecr-ECSTaskDefinition" {
           retries  = 2
           timeout  = 3
         }
-        image = format("%s.dkr.ecr.%s.amazonaws.com/squid-ecr-custom:latest", data.aws_caller_identity.current.account_id, data.aws_region.current.name)
+        image = format("%s.dkr.ecr.%s.amazonaws.com/squid-ecr-ecrrepository:latest", data.aws_caller_identity.current.account_id, data.aws_region.current.name)
         links = []
         logConfiguration = {
           logDriver = "awslogs"
@@ -56,7 +56,7 @@ resource "aws_ecs_task_definition" "squid--custom-ecr-ECSTaskDefinition" {
   cpu                = "256"
   execution_role_arn = aws_iam_role.r-squid-ecr-ECSTaskExecutionRole-BSNU23J2XF0S.arn
   #family             = "squid-ecr-ECSTaskDefinition"
-  family             = "squid-ecr-custom"
+  family             = "squid-ecr-standard"
   memory             = "512"
   network_mode       = "awsvpc"
   requires_compatibilities = [

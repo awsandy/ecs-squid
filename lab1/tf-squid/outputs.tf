@@ -1,5 +1,5 @@
 output "aws_ecr_repository__squid-ecr-ecrrepository__id" {
-  value = aws_ecr_repository.squid-ecr-custom.name
+  value = aws_ecr_repository.squid-ecr-ecrrepository.name
 }
 
 output "endpoint_service_name" {
