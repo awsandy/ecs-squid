@@ -8,7 +8,6 @@ resource "aws_ecs_service" "squid-ecr-ECSCluster__squid-ecr-ECSService-Kf9lgxSDQ
   enable_ecs_managed_tags            = false
   enable_execute_command             = false
   health_check_grace_period_seconds  = 0
-  #iam_role                           = "/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS"
   launch_type                        = "FARGATE"
   name                               = "squid-ecr-ECSService-Kf9lgxSDQTcT"
   platform_version                   = "LATEST"
@@ -28,8 +27,8 @@ resource "aws_ecs_service" "squid-ecr-ECSCluster__squid-ecr-ECSService-Kf9lgxSDQ
   }
 
   load_balancer {
-    #container_name   = "squid-ecr-SquidProxyContainer"
-    container_name   = "squid-ecr-standard"
+    container_name   = "squid-ecr-SquidProxyContainer"
+    #container_name   = "squid-ecr-standard"
     container_port   = 3128
     target_group_arn = aws_lb_target_group.arn_aws_elasticloadbalancing_targetgroup_squid-ecr.arn
   }
