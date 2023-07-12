@@ -61,7 +61,8 @@ resource "aws_codebuild_project" "squid-ecr-SquidProxyBuild" {
     environment_variable {
       name  = "CONTAINER_NAME"
       type  = "PLAINTEXT"
-      value = "squid-ecr-SquidProxyContainer"
+      #value = "squid-ecr-SquidProxyContainer"
+      value = "squid-ecr-custom"
     }
   }
 
