@@ -36,12 +36,12 @@ resource "aws_codebuild_project" "squid-ecr-SquidProxyBuild" {
     environment_variable {
       name  = "IMAGE_REPO_NAME"
       type  = "PLAINTEXT"
-      value = format("%s.dkr.ecr.%s.amazonaws.com/squid-ecr-ecrrepository", data.aws_caller_identity.current.account_id, data.aws_region.current.name)
+      value = format("%s.dkr.ecr.%s.amazonaws.com/squid-ecr-custom", data.aws_caller_identity.current.account_id, data.aws_region.current.name)
     }
     environment_variable {
       name  = "IMAGE_URI"
       type  = "PLAINTEXT"
-      value = format("%s.dkr.ecr.%s.amazonaws.com/squid-ecr-ecrrepository:latest", data.aws_caller_identity.current.account_id, data.aws_region.current.name)
+      value = format("%s.dkr.ecr.%s.amazonaws.com/squid-ecr-custom:latest", data.aws_caller_identity.current.account_id, data.aws_region.current.name)
     }
     environment_variable {
       name  = "ECR_REPOSITORY"

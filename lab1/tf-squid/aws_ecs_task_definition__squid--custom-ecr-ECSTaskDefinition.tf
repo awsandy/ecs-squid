@@ -24,7 +24,7 @@ resource "aws_ecs_task_definition" "squid--custom-ecr-ECSTaskDefinition" {
           retries  = 2
           timeout  = 3
         }
-        image = format("%s.dkr.ecr.%s.amazonaws.com/squid-ecr-ecrrepository:latest", data.aws_caller_identity.current.account_id, data.aws_region.current.name)
+        image = format("%s.dkr.ecr.%s.amazonaws.com/squid-ecr-custom:latest", data.aws_caller_identity.current.account_id, data.aws_region.current.name)
         links = []
         logConfiguration = {
           logDriver = "awslogs"
